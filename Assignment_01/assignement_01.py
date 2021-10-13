@@ -27,4 +27,7 @@ hist, bin_edges = np.histogram(numbers, bins=int(params["nBins"]))
 
 # plotting the histogram
 plt.hist(bin_edges[:-1], bin_edges, weights=hist)
+plt.xlabel("value")
+plt.ylabel("occurence")
+plt.title("random value distribution")
 plt.show()
