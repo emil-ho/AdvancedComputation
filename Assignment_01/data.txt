@@ -1,0 +1,4 @@
+distributionType    g
+nBins               100
+totalNTries         10000000
+widthSDFraction     0.2
