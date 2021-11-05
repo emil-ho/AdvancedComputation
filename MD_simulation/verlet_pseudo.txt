@@ -1,0 +1,31 @@
+This is the pseudo code for the Verlet algorithm from the PL at the 18.10.2021
+
+What we know:
+    Positions at a certain time step
+    Neighbor list
+    Velocities at a given time step
+
+What we want:
+    Kinetic energy
+    Potential
+    Energy
+    Forces on the atoms
+
+LJ Potential: V_LJ = 4 * epsilon * ((sigma / r_ij)**12 - (sigma / r_ij)**6))
+Force: vec{F}   = - (dV / dr) * vec{u_r} 
+                = - (4 * epsilon * (-12 * (sigma**12 / r_ij**13) + 6 * (sigma**6 / r_ij**7))) vec{u_r}
+                = (48 * epsilon / r) * ((sigma / r)**12 - 0.5 * (sigma / r)**12) * vec{u_r}
+                = (48 * epsilon / r**2) * ((sigma / r)**12 - 0.5 * (sigma / r)**12) * vec{r}
+
+Pseudocode:
+
+- initialize potential and the force on all atoms
+- Loop over all atoms in the supercell (0 < iat < N_at)
+    - identify the first neighbor POINT(IAT) = JBEG
+    - identify the last neighbor POINT(IAT+1)-1 = JEND
+    - Loop over all the neighbors (JBEG < J < JEND)
+        JNEIG = LIST(J)
+        compute the relative postitions
+        apply the PBC
+        compute the interatomic distance r
+        check if r is smaller than r_c

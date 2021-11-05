@@ -1,0 +1,32 @@
+This is the pseudo code for the neighbor list from the PL at the 25.10.2021
+
+input:
+cutoff_distance (r_c) ~ 2.5 sigma
+cutoff_list (r_l) ~ 2.8 sigma
+
+make a warning, if r_c is larger than r_l
+distances in units of sigma = 1
+
+starting point:
+positions for all the atoms in the supercell (origin at the center of the supercell)
+
+goal:
+to have a list of neighbours of all the atoms within the supercell
+
+Pseudocode:
+BOXL = ..  # size of the supercell in units of sigma
+POINT, LIST = .., ..  # initialise arrays POINT and LIST
+NLIST = 0  # initialise counter
+reset the diplacement of all the atoms to 0
+- loop over all the atoms in the supercell (with index iat)
+    POINT(iat) = NLIST + 1
+    - loop over atom (iat+1) to Nat  # (iat+1) avoids double counting
+        compute the relative postitions between the 2 atoms (vec{pos2} - vec{pos1})
+        RXIJ = ANINT(RCIJ/BOXL) * BOXL
+        compute the (squared) distance between the atoms
+        compare distance with cutoff_list
+        if larger:
+            nothing happens
+        if smaller: store in LIST 
+            NLIST =+ 1
+            LIST[NLIST] = index of neighbour
