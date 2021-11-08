@@ -1,1 +1,1 @@
-# this file contains the verlet algorythm
+# this file contains the verlet algorithm
