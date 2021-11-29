@@ -1,0 +1,910 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es"
+      lang="es">
+
+  
+    
+    
+    
+    
+    
+
+  
+
+  <head>
+
+    <meta http-equiv="Content-Type"
+          content="text/html;charset=utf-8" />
+
+    
+      <base href="./" /><!--[if lt IE 7]></base><![endif]-->
+    
+
+    <meta name="generator" content="Plone - http://plone.org" />
+
+    <link rel="kss-base-url" href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase" />
+
+  
+  
+    
+      <script type="text/javascript"
+              src="http://ocw.unican.es/portal_javascripts/Left%20Skin/event-registration-cachekey7945.js">
+      </script>
+    
+    
+  
+
+  
+  
+    
+    
+      <style type="text/css"><!-- @import url(http://ocw.unican.es/portal_css/Left%20Skin/base-cachekey0258.css); --></style>
+    
+    
+  
+
+  
+    
+    
+      <style type="text/css" media="screen"><!-- @import url(http://ocw.unican.es/portal_css/Left%20Skin/bookmarklets-cachekey1013.css); --></style>
+    
+    
+  
+
+  
+
+<title>Materiales de Clase &mdash; OCW Universidad de Cantabria</title>
+
+
+    <!-- Internet Explorer CSS Fixes -->
+    <!--[if IE]>
+        <style type="text/css" media="all">@import url(http://ocw.unican.es/IEFixes.css);</style>
+    <![endif]-->
+
+    
+    <link rel="author"
+          href="http://ocw.unican.es/author/(course_default)"
+          title="Información sobre el autor" />
+
+
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://ocw.unican.es/favicon.ico" />
+
+
+    <link rel="home" href="http://ocw.unican.es"
+          title="Página de portada" />
+
+    <link rel="contents" href="http://ocw.unican.es/sitemap"
+          title="Mapa del Sitio" />
+
+
+
+
+    <link rel="search"
+          href="http://ocw.unican.es/search_form"
+          title="Search this site" />
+
+    <link rel="alternate" type="application/rdf+xml"
+          href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase/rdf" />
+
+
+
+
+    
+
+    <!-- Disable IE6 image toolbar -->
+    <meta http-equiv="imagetoolbar" content="no" />
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+  </head>
+
+  <body class="section-ensenanzas-tecnicas template-document_view"
+        dir="ltr">
+    <div id="visual-portal-wrapper">
+
+      <div id="portal-top">
+        <div id="portal-header">
+<p class="hiddenStructure">
+  <a accesskey="2"
+     href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase#documentContent">Cambiar a contenido.</a> |
+
+  <a accesskey="6"
+     href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase#portlet-navigation-tree">Saltar a navegación</a>
+</p>
+
+<ul id="portal-siteactions">
+
+    <li id="siteaction-sitemap"><a
+    href="http://ocw.unican.es/sitemap" accesskey="3"
+    title="Mapa del Sitio">Mapa del Sitio</a></li>
+    <li id="siteaction-accessibility"><a
+    href="http://ocw.unican.es/accessibility-info"
+    accesskey="0" title="Accesibilidad">Accesibilidad</a></li>
+    <li id="siteaction-contact"><a
+    href="http://ocw.unican.es/contact-info" accesskey="9"
+    title="Contacto">Contacto</a></li>
+
+</ul>
+
+<div id="portal-searchbox">
+    <form name="searchform"
+          action="http://ocw.unican.es/search">
+
+        <label for="searchGadget" class="hiddenStructure">Buscar</label>
+
+        <div class="LSBox">
+        <input name="SearchableText" type="text" size="18"
+               title="Buscar en el Sitio" accesskey="4"
+               class="inputLabel" id="searchGadget" />
+
+        <input class="searchButton" type="submit"
+               value="Buscar" />
+    
+        <div class="searchSection">
+            <input id="searchbox_currentfolder_only"
+                   class="noborder" type="checkbox"
+                   name="path"
+                   value="/ocw/ensenanzas-tecnicas/bases-de-datos" />
+            <label for="searchbox_currentfolder_only"
+                   style="cursor: pointer">solo en la sección actual</label>
+        </div>
+
+        <div class="LSResult" id="LSResult" style=""><div class="LSShadow" id="LSShadow"></div></div>
+        </div>
+    </form>
+
+    <div id="portal-advanced-search" class="hiddenStructure">
+        <a href="http://ocw.unican.es/search_form"
+           accesskey="5">Búsqueda Avanzada…</a>
+    </div>
+
+</div>
+
+<a id="portal-logo" accesskey="1"
+   href="http://ocw.unican.es">
+    <img src="http://ocw.unican.es/logo.gif" alt="" title="" height="63" width="63" /></a>
+
+
+    <h5 class="hiddenStructure">Secciones</h5>
+
+    <ul id="portal-globalnav">
+        <li id="portaltab-index_html" class="selected">
+            <a href="http://ocw.unican.es" title="">Inicio</a></li>
+        <li id="portaltab-Profesorado" class="plain">
+            <a href="http://ocw.unican.es/vicerrectorado-de-profesorado"
+               title="">Vicerrectorado de Profesorado</a></li>
+    </ul>
+
+</div>
+
+      </div>
+
+      <div class="visualClear" id="clear-space-before-wrapper-table"><!-- --></div>
+
+      <table id="portal-columns">
+        <tbody>
+          <tr>
+            
+            <td id="portal-column-one" rowspan="2">
+              <div class="visualPadding">
+                
+                  
+<div id="portletwrapper-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f6f63770a53696d706c65204e617620506f72746c6574"
+     class="portletWrapper kssattr-portlethash-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f6f63770a53696d706c65204e617620506f72746c6574"><dl class="portlet" id="portlet-simple-nav">
+
+  <dt class="portletHeader">
+    <span>Cursos Contents</span>
+  </dt>
+
+  
+
+    <dd class="portletItem">
+      
+      <a href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos"
+         title="Bases de Datos (2011)">Bases de Datos (2011) Home</a>
+    </dd>
+
+  
+  
+
+    <dd class="portletItem">
+      
+      <a href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/programa"
+         title="Programa">Programa </a>
+    </dd>
+
+  
+  
+
+    <dd class="portletItem">
+      
+      <a href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/bibliografia"
+         title="Bibliografía">Bibliografía </a>
+    </dd>
+
+  
+  
+
+    <dd class="portletItem">
+      
+      <a href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase"
+         title="Materiales de Clase">Materiales de Clase </a>
+    </dd>
+
+  
+  
+
+    <dd class="portletItem">
+      
+      <a href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/practicas"
+         title="Prácticas">Prácticas </a>
+    </dd>
+
+  
+  
+
+    <dd class="portletItem">
+      
+      <a href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/pruebas-de-evaluacion"
+         title="Pruebas de Evaluación">Pruebas de Evaluación </a>
+    </dd>
+
+  
+  
+
+    <dd class="portletItem">
+      
+      <a href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/guia-de-aprendizaje"
+         title="Guía de Aprendizaje">Guía de Aprendizaje </a>
+    </dd>
+
+  
+  
+
+    <dd class="portletItem">
+      
+      <a href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/sobre-el-profesor"
+         title="Sobre el Profesor">Sobre el Profesor </a>
+    </dd>
+
+  
+
+  <dd class="portletFooter">
+    <span class="portletBottomLeft"></span>
+    <span class="portletBottomRight"></span>
+  </dd>
+			
+</dl>
+</div>
+
+
+<div class="managePortletsLink">
+  
+</div>
+
+                
+                &nbsp;
+              </div>
+            </td>
+            
+
+	    
+	    <td id="portal-content-top" colspan="1">
+	      <div id="portal-personaltools-wrapper">
+
+<h5 class="hiddenStructure">Herramientas Personales</h5>
+
+<ul id="portal-personaltools" class="visualInline">
+   
+ 
+    
+        <li>
+            <a href="http://ocw.unican.es/login_form">Entrar</a>
+        </li>
+    
+
+</ul>
+</div>
+
+
+    
+
+
+<div id="portal-breadcrumbs">
+
+    <span id="breadcrumbs-you-are-here">Usted está aquí:</span>
+    <a href="http://ocw.unican.es">Inicio</a>
+    <span class="breadcrumbSeparator">
+        &rarr;
+        
+    </span>
+    <span dir="ltr">
+        
+            <a href="http://ocw.unican.es/ensenanzas-tecnicas">Ingeniería y Arquitectura</a>
+            <span class="breadcrumbSeparator">
+                &rarr;
+                
+            </span>
+            
+         
+    </span>
+    <span dir="ltr">
+        
+            <a href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos">Bases de Datos (2011)</a>
+            <span class="breadcrumbSeparator">
+                &rarr;
+                
+            </span>
+            
+         
+    </span>
+    <span dir="ltr">
+        
+            
+            
+            <span>Materiales de Clase</span>
+         
+    </span>
+
+</div>
+
+	    </td>
+	    
+
+	  </tr>
+
+
+	  <tr>
+            
+            <td id="portal-column-content">
+
+              
+                <div class="">
+
+                  
+
+
+                  <div id="region-content" class="documentContent">
+
+                    <span id="contentTopLeft"></span>
+                    <span id="contentTopRight"></span>
+                    
+                    <a name="documentContent"></a>
+
+                    
+
+    <dl class="portalMessage info" id="kssPortalMessage" style="display:none">
+        <dt>Info</dt>
+        <dd></dd>
+    </dl>
+
+
+                    
+                    <div id="viewlet-above-content"></div>
+
+                    
+                    
+                    <div id="content">
+                      
+                      
+    
+
+        
+
+        <!-- Page Content Begins Here -->
+
+        
+        
+        <h1 id="parent-fieldname-title"
+            class="documentFirstHeading">
+            Materiales de Clase
+        </h1>
+        
+        
+        
+
+        <div class="visualClear"><!-- --></div>
+<div class="documentActions">
+    
+
+    <h5 class="hiddenStructure">Acciones de Documento</h5>
+
+    <ul>
+    
+        
+        <li id="document-action-sendto">
+            <a href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase/sendto_form">
+	        <img src="mail_icon.gif" alt="Enviar esto"
+              title="Enviar esto" />
+            </a>
+        </li>
+	
+        
+    
+    
+        
+        <li id="document-action-print">
+            <a href="javascript:this.print();">
+	        <img src="print_icon.gif" alt="Imprimir esto"
+              title="Imprimir esto" />
+            </a>
+        </li>
+	
+        
+    
+    
+        
+        <li id="document-action-skinless">
+            <a href="http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase/skinless_view">
+	        <img src="document_icon.gif" alt="Content View"
+              title="Content View" />
+            </a>
+        </li>
+	
+        
+    
+    
+        
+        
+          <script language="javascript">
+            function showBookmarklets()
+            {
+               bm = document.getElementById('bookmarklet');
+               if (bm.style['display'] == 'none') {
+                   bm.style['display'] = 'block';
+               } else {
+                   bm.style['display'] = 'none';
+               }
+
+            }
+          </script>
+
+
+         <li>
+            <a style="cursor:pointer;"
+               onclick="showBookmarklets()">
+
+                <img src="bookmarklets.gif" alt="Bookmarks"
+                     title="Bookmarks"
+                     id="icon-bookmarklets" />
+            </a>
+
+            <span id="bookmarklet" style="display:none;"> 
+                  
+      
+        
+        
+        <ul>
+
+          
+            <li>
+              <a href="http://del.icio.us/post?url=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;title=Materiales+de+Clase"
+                 title="del.icio.us - Materiales de Clase"
+                 class="link-plain">
+                <img src="delicious.gif" alt="del.icio.us" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://digg.com/submit?phase=2&amp;url=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;title=Materiales+de+Clase"
+                 title="Digg - Materiales de Clase"
+                 class="link-plain">
+                <img src="digg.gif" alt="Digg" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://www.stumbleupon.com/submit?url=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;title=Materiales+de+Clase"
+                 title="StumbleUpon - Materiales de Clase"
+                 class="link-plain">
+                <img src="stumble.gif" alt="StumbleUpon" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://myweb2.search.yahoo.com/myresults/bookmarklet?u=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;t=Materiales+de+Clase"
+                 title="Yahoo - Materiales de Clase"
+                 class="link-plain">
+                <img src="yahoo.gif" alt="Yahoo" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://www.google.com/bookmarks/mark?op=edit&amp;output=popup&amp;bkmk=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;title=Materiales+de+Clase"
+                 title="Google - Materiales de Clase"
+                 class="link-plain">
+                <img src="google.gif" alt="Google" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://www.spurl.net/spurl.php?title=Materiales+de+Clase&amp;url=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase"
+                 title="Spurl - Materiales de Clase"
+                 class="link-plain">
+                <img src="spurl.gif" alt="Spurl" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://wists.com/r.php?c=&amp;r=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;tot;e=Materiales+de+Clase"
+                 title="Wists - Materiales de Clase"
+                 class="link-plain">
+                <img src="wists.gif" alt="Wists" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://www.simpy.com/simpy/LinkAdd.do?href=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;title=Materiales+de+Clase"
+                 title="Simpy - Materiales de Clase"
+                 class="link-plain">
+                <img src="simpy.gif" alt="Simpy" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://www.newsvine.com/_tools/seed&amp;save?u=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;h=Materiales+de+Clase"
+                 title="Newsvine - Materiales de Clase"
+                 class="link-plain">
+                <img src="newsvine.gif" alt="Newsvine" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://www.blinklist.com/index.php?Action=Blink/addblink.php&amp;Description=&amp;Url=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;Title=Materiales+de+Clase"
+                 title="Blinklist - Materiales de Clase"
+                 class="link-plain">
+                <img src="blinklist.gif" alt="Blinklist" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://www.furl.net/storeIt.jsp?u=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;t=Materiales+de+Clase"
+                 title="Furl - Materiales de Clase"
+                 class="link-plain">
+                <img src="furl.gif" alt="Furl" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://reddit.com/submit?url=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;title=Materiales+de+Clase"
+                 title="Reddit - Materiales de Clase"
+                 class="link-plain">
+                <img src="reddit.gif" alt="Reddit" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://cgi.fark.com/cgi/fark/edit.pl?new_url=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;new_comment=Materiales+de+Clase&amp;linktype="
+                 title="Fark - Materiales de Clase"
+                 class="link-plain">
+                <img src="fark.gif" alt="Fark" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://blogmarks.net/my/new.php?mini=1&amp;simple=1&amp;url=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;title=Materiales+de+Clase"
+                 title="Blogmarks - Materiales de Clase"
+                 class="link-plain">
+                <img src="blogmarks.gif" alt="Blogmarks" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://smarking.com/editbookmark/?url=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase"
+                 title="Smarking - Materiales de Clase"
+                 class="link-plain">
+                <img src="smarking.gif" alt="Smarking" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://ma.gnolia.com/bookmarklet/add?url=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;title=Materiales+de+Clase"
+                 title="Magnolia - Materiales de Clase"
+                 class="link-plain">
+                <img src="magnolia.gif" alt="Magnolia" /></a>
+            </li>
+          
+          
+          
+            <li>
+              <a href="http://www.ozmozr.com/submit?u=http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase&amp;t=Materiales+de+Clase&amp;c="
+                 title="Ozmozr - Materiales de Clase"
+                 class="link-plain">
+                <img src="ozmozr.gif" alt="Ozmozr" /></a>
+            </li>
+          
+          
+          
+        </ul>
+        
+      
+      
+    
+
+
+            </span>
+        </li>
+
+	
+    
+
+
+    </ul>
+    
+
+    
+
+</div>
+
+
+
+        
+        
+        
+        
+        
+        
+
+        
+
+
+        
+
+        <div id="parent-fieldname-text" class="plain">
+            
+<ul><li>Instalación de productos de software.&nbsp;<a title="Instalacion de productos software" class="internal-link" href="./Instalacion%20de%20productos%20software.pdf">Descargar archivo</a>.</li></ul>
+<div>&nbsp;</div>
+<h3>BLOQUE TEMÁTICO I</h3>
+<ul style="list-style-type: square;"><li><strong><a title="Tema1" class="internal-link" href="./Tema1.pdf">MC-F-001</a></strong>. &nbsp;Tema 1. Introducción a las Bases de Datos.&nbsp;</li><li><strong><a title="Tema 2" class="internal-link" href="./Tema%202.pdf">MC-F-002</a></strong>. &nbsp;Tema 2.&nbsp;Modelo de datos relacional.&nbsp;</li><li><strong><a title="Tema3" class="internal-link" href="./Tema3.pdf">MC-F-003</a></strong>. &nbsp;Tema 3.&nbsp;Lenguaje SQL.&nbsp;</li>
+<ul><li>Aplicación Compras SQL Server 2008 (Script de apoyo para el Tema 3). <a title="t3" class="internal-link" href="./t3.zip">Descargar archivos</a>.</li></ul>
+</ul>
+<div>&nbsp;</div>
+<h3>BLOQUE TEMÁTICO II</h3>
+<ul style="list-style-type: square;"><li><strong><a title="Tema4" class="internal-link" href="./Tema4.pdf">MC-F-004</a></strong>. &nbsp;Tema 4.&nbsp;Administración de Bases de Datos.&nbsp;</li><li><strong><a title="Tema5" class="internal-link" href="./Tema5.pdf">MC-F-005</a></strong>. &nbsp;Tema 5. Diseño y desarrollo de aplicaciones de Base de Datos.&nbsp;</li>
+<li><strong><a title="Tema6" class="internal-link" href="./Tema6.pdf">MC-F-006</a></strong>. &nbsp;Tema 6.&nbsp;Otros modelos de datos.</li></ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+        </div>
+
+        <div class="relatedItems">
+    
+        
+            
+        
+    
+</div>
+    
+        <div class="reviewHistory" id="review-history">
+    
+</div>
+
+
+        <style>
+
+.documentByLine span {
+    padding-bottom: 3px;
+}
+
+</style>
+
+<div class="documentByLine"
+     style="text-align: right; margin-top: 2em; border-top: 1px solid #999;">
+
+
+  Copyright 2014, 
+  por los autores de los cursos. 
+  
+    
+    <a style="cursor:pointer;text-decoration:underline"
+       class="visualNoPrint"
+       onclick="prompt('The citation for this resource is presented in APA format. Copy the citation to your clipboard for reuse.', 'Materiales de Clase. (2011, March 17). Retrieved February 03, 2015, from OCW Universidad de Cantabria Web site: http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase.')">Cite/attribute Resource</a>.     
+    <style type="text/css">
+      @media print { #print_citation {display:block;} }
+      @media screen { #print_citation {display:None;} }
+    </style>
+    <span id="print_citation">Materiales de Clase. (2011, March 17). Retrieved February 03, 2015, from OCW Universidad de Cantabria Web site: http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase.</span>
+    Esta obra se publica bajo una licencia
+
+    <a class="link-plain" rel="license"
+       alt="Creative Commons 4.0"
+       href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+       title="Creative Commons 4.0">Creative Commons 4.0.</a>
+
+    
+
+    <a class="link-plain" rel="license"
+       alt="Creative Commons 4.0"
+       href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+       title="Creative Commons 4.0">
+    <img style="vertical-align: text-top; margin-top: 3px; padding-left: 5px"
+         src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"
+         alt="Creative Commons 4.0" /></a>
+    
+
+
+  
+
+
+</div>
+
+
+        <!-- cite/attribute resource:
+Materiales de Clase. (2011, March 17). Retrieved February 03, 2015, from OCW Universidad de Cantabria Web site: http://ocw.unican.es/ensenanzas-tecnicas/bases-de-datos/materiales-de-clase.
+-->
+
+
+
+        <!-- Page Content Ends Here -->
+
+    
+
+                    </div>
+                    
+
+                    
+                    
+                      
+    
+
+
+                    
+                    
+
+                    <span id="contentBottomLeft"></span>
+                    <span id="contentBottomRight"></span>
+
+                  </div>
+
+                </div>
+
+              
+            </td>
+            
+
+            
+            
+            
+          </tr>
+        </tbody>
+      </table>
+      
+
+      <div class="visualClear" id="clear-space-before-footer"><!-- --></div>
+      
+      
+
+      
+
+        <div id="portal-footer">
+  <p id="portal-footer-items">
+    <a href="http://ocw.unican.es/feedback">feedback</a> ::
+    <a href="http://ocw.unican.es/sitemap">site map</a> ::
+    <a href="http://ocw.unican.es/accessibility-info">accessibility</a> ::
+    <a href="http://ocw.unican.es/about/terms-of-use">terms of use</a> ::
+    <a href="http://ocw.unican.es/about/privacy-policy">privacy policy</a> ::
+    <a href="http://cosl.usu.edu/projects/educommons">powered by eduCommons</a>
+  </p>
+</div>
+
+  <div id="portal-colophon">
+      
+
+      
+
+      <div class="colophonWrapper">
+      <ul>
+        <li>
+          <a href="http://plone.org"
+             title="Este sitio Plone ha sido construido usando Plone CMS, el Sistema de Gestión de Contenidos de Fuentes Abiertos. Haga clic para más información.">Hecho con Plone</a>
+        </li>
+        <li>
+          <a href="http://validator.w3.org/check/referer"
+             title="Este sitio contiene XHTML válido.">XHTML válido</a>
+        </li>
+        <li>
+          <a href="http://jigsaw.w3.org/css-validator/check/referer&amp;warning=no&amp;profile=css3&amp;usermedium=all"
+             title="Este sitio ha sido construido con CSS válidas.">CSS válida</a>
+        </li>
+        <li>
+          <a href="http://www.section508.gov"
+             title="Este sitio cumple las Directrices de Accesibilidad, Sección 508, del Gobierno de los EE.UU.">Sección 508</a>
+        </li>
+        <li>
+          <a href="http://www.w3.org/WAI/WCAG1AA-Conformance"
+             title="Este sitio está construido conforme a las Directrices de Accesibilidad para el Contenido Wed del W3C-WAI">WCAG</a>
+        </li>
+      </ul>
+      </div>
+
+    </div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-8711121-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-4901671-4");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-39187146-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl<https://ssl/>' : 'http://www<http://www/>') + '.google-analytics.com/ga.js<http://google-analytics.com/ga.js>';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+      
+
+      <div class="visualClear"></div>
+    </div>
+<div id="kss-spinner"><img alt=""
+                           src="http://ocw.unican.es/spinner.gif" /></div>
+   <!-- START Nielsen//NetRatings SiteCensus V5.2 -->
+    <!-- COPYRIGHT 2006 Nielsen//NetRatings -->
+    <script type="text/javascript">
+        var _rsCI="es-universia";
+        var _rsCG="0";
+        var _rsDN="//secure-uk.imrworldwide.com/";
+        var _rsCC=0;
+    </script>
+    <script type="text/javascript" src="//secure-uk.imrworldwide.com/v52.js"></script>
+    <noscript>
+        <img src="//secure-uk.imrworldwide.com/cgi-bin/m?ci=es-universia&amp;cg=0" alt="" />
+    </noscript>
+    <!-- END Nielsen//NetRatings SiteCensus V5.2 -->
+</body>
+</html>
+
+
+
+
+
+    
