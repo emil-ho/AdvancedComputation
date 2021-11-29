@@ -1,0 +1,11 @@
+class LennardJones
+!!!345986.java!!!	LennardJones(in s : State)
+      super(s);
+!!!346114.java!!!	calcForce() : double
+	//TODO...!
+
+	return 0.0;
+!!!346242.java!!!	evalPotential(in distance : double) : double
+	//TODO...!
+
+	return 0.0;

@@ -1,0 +1,50 @@
+class InputData
+!!!134914.java!!!	InputData(in simulationData : string)
+		//creates the experiment with the data in the text file
+		//Use "." as decimal separator
+		Locale.setDefault(Locale.ENGLISH);
+
+		//TODO: 
+
+
+		/*g80: values to consider later */
+		unitSystem           =   IInit.UnitSystems.REDUCED;
+		timeStep             =   1.0E-15;
+		totalTime            =   1.0E-13;
+		nickname             =   "SimTest";
+		lengthParam          =   0.341E-9;
+		energyParam          =   119.8;
+		density              =   0.83684894378368910508054582719758;
+		mass                 =   1.0;
+		atomicNumber         =   1;
+		temperature          =   0.72871452420701168614357262103506;
+		systemSize           =   6.0;
+		cutoffRadius         =   2.5;
+		skinRadius           =   2.7;
+		potential            =   IForce.TypeOfPotential.LENNARDJONES;
+		initialLattice       =   IInit.TypeOfCellLattice.FCC;
+		NoseHooverThermostatParam = 0.0; 
+		computingAlgorithm   =   IVelocity.VelocityComputingAlgorithm.VERLET; 
+		simulationFraction   =   0.02;
+		startingFraction     =   0.5;
+		outputFolder         =   "./output/"; 
+		histogramResolution  =   100;
+		cellSize             =   Math.pow(4/density,1/3);
+		cellsInMoviePerAxis  =   2;
+		/*    */
+!!!323714.java!!!	getNCells() : int
+    return this.nCells;
+!!!323842.java!!!	setNCellsInitialValue(in nCells : int) : bool
+	    if (nCells!=0) {
+	    this.nCells = nCells;
+	    return true;
+	    }
+	    return false;
+!!!480898.java!!!	factorPositions() : double
+		return this.lengthParam;
+!!!481026.java!!!	factorEnergy() : double
+		return this.energyParam;
+!!!481154.java!!!	factorMass() : double
+		return this.mass;
+!!!481282.java!!!	factorVelocity() : double
+		return Math.sqrt(this.energyParam/this.mass);

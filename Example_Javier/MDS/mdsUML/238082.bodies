@@ -1,0 +1,180 @@
+class MDSRun
+!!!234882.java!!!	createSimulator() : IMDS
+	return new MDSRun();
+!!!233986.java!!!	simulate(in experiment : InputData) : ResultsFiles
+	if (runningState != RunningState.READY) return null;
+	
+	//this indicates that the simulation will not be able to be interrupted
+	runningState = RunningState.UNINTERRUPTIBLE;
+	
+	//run it up to completion
+    ResultsFiles results = simulation (experiment);
+	
+    //reset the state to enable it to run again
+    runningState = RunningState.READY;
+    
+    return results;
+!!!258818.java!!!	startSimulation(in experiment : InputData) : bool
+    if (runningState != RunningState.READY) return false;
+    
+    //this indicates that the simulation is running concurrently
+    runningState = RunningState.RUNNING;
+        
+    //store the experiment in the attribute
+    concurrentExperiment = experiment;
+    
+    //create the thread to run it
+    simulationThread = new Thread(this);
+    
+    //start the run() operation
+    simulationThread.start();
+    
+    //returns control to the caller
+    return true;
+!!!234370.java!!!	currentSimulationFraction() : double
+	return ( (double) step ) / ( (double) nSteps );
+!!!234498.java!!!	pauseSimulation() : bool
+		if (runningState != RunningState.RUNNING) return false;
+
+		//signal the simulation thread to stop executing 
+		//the simulation and simply wait
+		runningState = RunningState.PAUSE;
+
+		//wait until the simulation is effectively paused
+		while(runningState != RunningState.PAUSED) {
+			try{ Thread.sleep(500);
+			}catch (InterruptedException e){
+				//if an interrupt signal is received there is not guarantee that the simulation could be stopped
+				return false;
+			}
+		}
+		return true;
+
+	  
+!!!257666.java!!!	continueSimulation() : bool
+		if (runningState != RunningState.PAUSED) return false;
+
+		int currentStep = step;
+
+		//signal the simulation thread to continue executing 
+		//the simulation
+		runningState = RunningState.RUNNING;
+
+		//wait until the simulation is effectively running
+		while(step == currentStep) {
+			try{ Thread.sleep(500);
+			}catch (InterruptedException e){
+				//if an interrupt signal is received there is not guarantee that the simulation could be put to run again
+				return false;
+			}
+		}
+		return true;
+!!!257794.java!!!	saveSimulation() : string
+	return null;
+!!!234754.java!!!	getSimulationResults() : ResultsFiles
+if (runningState != RunningState.DONE) return null;
+
+return concurrentResults;
+!!!467586.java!!!	run() : void
+	  
+	  //run it concurrently
+      concurrentResults = simulation (concurrentExperiment);
+  	
+      //set the state to enable the caller to get results back
+      runningState = RunningState.DONE;
+!!!467714.java!!!	simulation(in experiment : InputData) : ResultsFiles
+
+	  /* Calculate_nSteps&MovieSteps */
+
+	  //Calculate the number of steps
+	  nSteps = (int) Math.round(experiment.totalTime / experiment.timeStep);
+	  //calculate the step to start taken samples for the movie
+	  int startMovieStep = (int) (experiment.startingFraction*(double)nSteps);
+	  //calculate the final step to take samples
+	  int endMovieStep = startMovieStep + (int) (experiment.simulationFraction*(double)nSteps);
+	  endMovieStep=(endMovieStep>nSteps)?nSteps:endMovieStep;
+
+	  //prepare the list to take the log of the system (energies)
+	  experiment.energyLog = new ArrayList<EnergyLog>(nSteps);
+	  //prepare the list to take the movie samples
+	  experiment.movie = new ArrayList<State>(endMovieStep-startMovieStep+1);
+
+	  /* Initial setup for the simulation  */
+
+	  //Create the initialization object 
+	  IInit init = mds.init.Init.createInit();
+	  //Invoke doInit() to get the initial state
+	  State s= init.doInit(experiment);
+	  experiment.InitialVelocityDistribution = init.getInitialVelocityDistribution();
+
+	  //Create the neighbours list management object
+	  INeighbours neighbours = mds.neighbours.Neighbours.createNeighbours(s);
+
+	  //Set the initial neighbours lists
+	  neighbours.calcVecinity(experiment.skinRadius+1);
+
+	  //Create the force calculation object
+	  IForce force = mds.force.Force.createForce(s);
+
+	  //Create the Velocity calculation object
+	  IVelocity velocity = mds.velocity.Velocity.createVelocity(s, force);
+
+	  //calculate the initial accelerations 
+	  //and take the potential energy it in the system log object
+	  s.energy.u = force.calcForce();
+
+	  //store the first state log in the experiment log list
+	  experiment.energyLog.add((EnergyLog) s.energy.clone());
+
+	  //create the list of particles in the visualization scope
+	  List<Particle> sampleScope = new ArrayList<Particle>();
+
+	  //calculus of the borders of the cube of interest
+	  double safetymargin = experiment.cellSize/4;
+	  double posBorder = experiment.cellSize*experiment.cellsInMoviePerAxis/2.0 + safetymargin;
+	  double negBorder = posBorder * (-1);
+
+	  //take the particles of interest from the complete list into the sampleScope  
+	  for (Particle p: s.particles){
+		  // if its position is in the scope
+		  if ( (p.r.x > negBorder && p.r.x < posBorder) && 
+				  (p.r.y > negBorder && p.r.y < posBorder) &&
+				  (p.r.z > negBorder && p.r.z < posBorder)    ) {
+			  sampleScope.add(p);
+		  }
+	  }
+
+
+	  /* Do the simulation  */
+	  simulationLoop:
+		  for(step=0; step<nSteps; step++) {
+
+			  //We simulate a time step for the current state.
+			  //and update the vicinity if needed
+			  neighbours.calcVecinity(velocity.calcVelocity());
+
+			  //store the current state log in the experiment log list
+			  experiment.energyLog.add((EnergyLog) s.energy.clone());
+
+			  //Check if a sample for the movie needs to be taken at this step 
+			  //and, if so, take the sample
+			  if (step>=startMovieStep && step<=endMovieStep) {
+				  //get a copy of the state with the sample of particles 
+				  //that fit in the visualization scope
+				  experiment.movie.add(s.copy(sampleScope));
+			  }
+
+			  stopIfRequested:
+				  if (runningState == RunningState.PAUSE) {
+					  runningState = RunningState.PAUSED;
+					  while(runningState == RunningState.PAUSED) {
+						  try{ Thread.sleep(500);
+						  }catch (InterruptedException e){
+							  Thread.currentThread().interrupt();}
+					  }
+				  }
+		  }
+
+	  //Create the output production object
+	  IOutput out = new mds.output.Output();
+	  return out.results(experiment, new ResultsFiles(experiment.outputFolder, experiment.nickname));

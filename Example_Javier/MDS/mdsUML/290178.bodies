@@ -1,0 +1,9 @@
+class Neighbours
+!!!220034.java!!!	createNeighbours(in s : State) : INeighbours
+	 
+		  return new Neighbours(s);
+
+!!!295810.java!!!	Neighbours(in s : State)
+      this.s = s;
+!!!296322.java!!!	calcVecinity(in maxDisplacement : double) : bool
+return false;

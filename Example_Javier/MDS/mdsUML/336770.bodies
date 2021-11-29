@@ -1,0 +1,11 @@
+class Hardwell
+!!!347010.java!!!	Hardwell(in s : State)
+      super(s);
+!!!347138.java!!!	calcForce() : double
+	//TODO...
+
+	return 0.0;
+!!!347266.java!!!	evalPotential(in distance : double) : double
+	//TODO...
+
+	return 0.0;

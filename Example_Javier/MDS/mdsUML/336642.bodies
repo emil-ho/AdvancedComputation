@@ -1,0 +1,11 @@
+class Buckingham
+!!!346626.java!!!	Buckingham(in s : State)
+      super(s);
+!!!346754.java!!!	calcForce() : double
+	//TODO...
+
+	return 0.0;
+!!!346882.java!!!	evalPotential(in distance : double) : double
+	//TODO...
+
+	return 0.0;

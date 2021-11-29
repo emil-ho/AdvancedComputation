@@ -1,0 +1,5 @@
+class Output
+!!!439042.java!!!	createOutput() : IOutput
+return new Output();
+!!!439298.java!!!	results(in experiment : InputData, in resultsFiles : ResultsFiles) : ResultsFiles
+	return null;

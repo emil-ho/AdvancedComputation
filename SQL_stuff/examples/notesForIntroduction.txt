@@ -1,0 +1,35 @@
+install MySQL
+
+mysql.com
+downloads
+search version 5.7
+MySQL Installer for Windows
+Windows (x86, 64-bit), ZIP Archive
+
+
+install Server
+
+You can get the manual from:
+https://dev.mysql.com./doc/refman/5.7/en/
+
+(In moodle you will have a previous version in spanish and this one in a PDF file)
+
+Try in the console:
+show databases;
+create database test1;
+connect test1;
+show tables;
+drop test1;
+
+
+Try following this video to use it from python:
+
+https://www.youtube.com/watch?v=LhsGA9PJtG0
+
+
+
+To use it with Java you can check this other video (you can skip the maven part):
+see https://www.youtube.com/watch?v=duEkh8ZsFGs
+
+
+

@@ -1,0 +1,16 @@
+class R3Point
+!!!227458.java!!!	distanceTo(in r3Point : R3Point) : double
+	  return 0.0;
+!!!395010.java!!!	R3Point(in x : double, in y : double, in z : double)
+	  super(x,y);
+	  this.z = z;
+!!!395138.java!!!	R3Point()
+	  super();
+!!!317186.java!!!	clone() : Object
+            Object obj=null;
+            try{
+                obj=super.clone();
+            }catch(Exception ex){  //Use CloneNotSupportedException if possible
+                System.out.println(" It was not possible to clone...");
+            }
+            return obj;

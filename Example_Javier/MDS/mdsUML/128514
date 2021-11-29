@@ -1,0 +1,685 @@
+format 222
+"Mds" // Mds
+  revision 19
+  modified_by 2 "julio"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "mds/mds/"
+  java_package "mds.mds"
+  classview 186754 "ClassView"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    associated_deployment_view deploymentview_ref 134530 // mdsModule
+    classdiagram 193794 "mdsClassDiagram"
+      classdiagramsettings member_max_width 0 end
+      size A4
+    end
+
+    class 238082 "MDSRun"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Basic services to run the simulation"
+      classrelation 198274 // <realization>
+	relation 197122 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 198274 // <realization>
+	  b parent class_ref 162946 // IMDS
+      end
+
+      class 400514 "RunningState"
+	visibility package stereotype "enum"
+	cpp_decl "${comment}enum ${name} {
+${items}
+};
+"
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}enum ${name}${implements} {
+${items};
+${members}}
+"
+	php_decl "${comment}${visibility}final class ${name} {
+${items}}
+"
+	python_2_2 python_decl "class ${name}:
+${docstring}${members}
+"
+	idl_decl "${comment}enum ${name} {
+${items}};
+"
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	comment "This class has the states in which the simulation can be"
+	attribute 331522 "UNINTERRUPTIBLE"
+	  public type class_ref 400514 // RunningState
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	  comment "This is the state used to indicate non concurrent simulations
+that will run to completion and hence are not managed."
+	end
+
+	attribute 331650 "READY"
+	  public type class_ref 400514 // RunningState
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	  comment "Indicates that the simulation has not been launched yet."
+	end
+
+	attribute 332034 "PAUSE"
+	  public type class_ref 400514 // RunningState
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	  comment "This state indicates that the simulation should be stopped and stay stopped."
+	end
+
+	attribute 332418 "PAUSED"
+	  public type class_ref 400514 // RunningState
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	  comment "This state indicates that the simulation has been stopped and stay stopped."
+	end
+
+	attribute 332162 "RUNNING"
+	  public type class_ref 400514 // RunningState
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	  comment "This is the normal state when the simulation runs in a separate thread"
+	end
+
+	attribute 338946 "DONE"
+	  public type class_ref 400514 // RunningState
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	  comment "This is the state that indicates that the simulation has finished and is waiting 
+for its results to be recalled. This is necessary when  the simulation runs in 
+a separate thread"
+	end
+      end
+
+      attribute 331394 "runningState"
+	private type class_ref 400514 // RunningState
+	init_value "RunningState.READY"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Internal attribute used to manage a running simulation"
+      end
+
+      attribute 331778 "step"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "This is the current step of the simulation"
+      end
+
+      attribute 331906 "nSteps"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "This is the total number of steps of the simulation"
+      end
+
+      attribute 332290 "simulationThread"
+	private explicit_type "Thread"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "This is the handler for the concurrent thread in which the
+simulation will run if requested."
+      end
+
+      attribute 339074 "concurrentExperiment"
+	private type class_ref 136194 // InputData
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "The experiment to run in the concurrent thread."
+      end
+
+      attribute 339202 "concurrentResults"
+	private type class_ref 176130 // ResultsFiles
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "The resultFiles object to store and return after a concurrent simulation."
+      end
+
+      operation 234882 "createSimulator"
+	class_operation public return_type class_ref 162946 // IMDS
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This static method returns a simulator object that implements the interface IMDS 
+
+@return an object that implements the interface IMDS"
+      end
+
+      operation 454402 "MDSRun"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+	comment "Default constructor
+"
+      end
+
+      operation 233986 "simulate"
+	force_body_gen public return_type class_ref 176130 // ResultsFiles
+	nparams 1
+	  param in name "experiment" type class_ref 136194 // InputData
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "It runs a simulation of the given experiment up to completion and produces 
+the output results. 
+
+@param experiment is the experiment object with the data needed to configure and 
+run the simulation
+@return returns the ResultsFile object with the names of all the requested 
+resulting data files generated. If any of those files could not 
+be generated the corresponding string would be a null reference. It returns null
+if the simulation is in an inadequate state to be started in an uninterruptible way."
+      end
+
+      operation 258818 "startSimulation"
+	public explicit_return_type "bool"
+	nparams 1
+	  param in name "experiment" type class_ref 136194 // InputData
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Starts a concurrent simulation for the experiment given as parameter.
+When it returns, the simulation has been already initiated
+and the steps are advancing.
+
+@param experiment is the experiment object with the data needed to 
+configure and run the simulation."
+      end
+
+      operation 234370 "currentSimulationFraction"
+	public explicit_return_type "double"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Indicates the fraction of the simulation at which the simulator is currently running.
+
+@retuns a double value from 0 to 1 indicating the fraction of the simulation 
+already performed. 0 means it has not started, 1 means it has already finished."
+      end
+
+      operation 234498 "pauseSimulation"
+	public explicit_return_type "bool"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Stops the advance of the simulation if it is running. 
+
+@return It returns true if it was succesfully paused, and 
+false in case the simulation was already paused or not 
+started to run concurrently.
+"
+      end
+
+      operation 257666 "continueSimulation"
+	public explicit_return_type "bool"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Continues a simulation previously paused.
+
+@return It returns true if the simulation was succesfully continued, and 
+false in case the simulation was already running or not 
+started to run concurrently.
+"
+      end
+
+      operation 257794 "saveSimulation"
+	public explicit_return_type "string"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "It saves the current status on disk so that in case of need the simulation 
+can be restarted from the saved point.  
+If the simulation is running it pauses the advance of the simulation after the 
+current step is done before saving, and continues running again. 
+
+@return a String with the name of the file holding the status of the simulation. 
+A not initialized or already finished simulation returns a null String
+"
+      end
+
+      operation 234626 "continueSavedSimulation"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "savedSimFile" explicit_type "string"
+	nexceptions 2
+	  exception class_ref 257922 // FileNotFound
+	  exception class_ref 257794 // FileCorrupted
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Continues a simulation previously stored to disk. If the simulation is currently running
+it is stopped,  the experiment is dismissed,  and it gets started from the saved file status.
+
+@param savedSimulationFile a string indicating the full path of a file holding the status of a 
+previously saved simulation."
+      end
+
+      operation 234754 "getSimulationResults"
+	public return_type class_ref 176130 // ResultsFiles
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "*
+ * Returns the output results if the simulation has finished or a null pointer if it has not
+ *
+ * @return returns the ResultsFile object with the names of all the requested 
+ * resulting data files generated. If any of those files could not 
+ * be generated the corresponding string would be a null reference.
+ "
+      end
+
+      simplerelation 134658
+	-_->
+	  stereotype "import"
+	  on 
+	  package_ref 128002 // GlobalView
+      end
+
+      simplerelation 250754
+	-_->
+	  stereotype "import"
+	  on 
+	  package_ref 128642 // Init
+      end
+
+      simplerelation 250882
+	-_->
+	  stereotype "import"
+	  on 
+	  package_ref 207234 // Output
+      end
+
+      simplerelation 251010
+	-_->
+	  stereotype "import"
+	  on 
+	  package_ref 128770 // Force
+      end
+
+      simplerelation 251138
+	-_->
+	  stereotype "import"
+	  on 
+	  package_ref 128898 // Velocity
+      end
+
+      simplerelation 251266
+	-_->
+	  stereotype "import"
+	  on 
+	  package_ref 129154 // Neighbours
+      end
+
+      simplerelation 257794
+	-_->
+	  stereotype "import"
+	  on 
+	  package_ref 213762 // java.util
+      end
+
+      operation 467586 "run"
+	public explicit_return_type "void"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This function is used to execute the simulation concurrently"
+      end
+
+      operation 467714 "simulation"
+	force_body_gen private return_type class_ref 176130 // ResultsFiles
+	nparams 1
+	  param in name "experiment" type class_ref 136194 // InputData
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This operation runs a simulation of the given experiment up to completion and produces 
+the output results. If it is running in a concurrent thread it can be
+paused and continued.
+
+@param experiment is the experiment object with the data needed to configure and 
+run the simulation
+@return returns the ResultsFile object with the names of all the requested 
+resulting images and data files generated. If any of those files could not 
+be generated the corresponding string would be a null reference."
+      end
+    end
+
+    activity 128002 "SimulationActivity"
+      specification operation_ref 233986 // simulate
+      activitydiagram 290818 "Diagram"
+	activitydiagramsettings
+	 end
+	size A4
+      end
+
+      activitynode 128002 initial_node ""
+	flow 128002 "<flow>"
+	  on activityaction_ref 128002 // activity action Calculate_nSteps&MovieSteps
+	end
+      end
+
+      activityaction 128002 "Calculate_nSteps&MovieSteps"
+	opaque_action
+	java_behavior "nSteps = (int) (Math.floor(e.totalTime/e.deltaTime))+1;
+
+nStepsToStore = 0;  //TODO
+
+startingStep = 0;   //TODO
+
+//TODO"
+	comment "Initialize local variables for the management of the simulation steps"
+	flow 128130 "<flow>"
+	  on activityaction_ref 128386 // activity action CreateInit
+	end
+      end
+
+      activityaction 128386 "CreateInit"
+	opaque_action
+	flow 128258 "<flow>"
+	  on activityaction_ref 128642 // activity action Init.doInit()
+	end
+      end
+
+      activityaction 128514 "CreateForce"
+	opaque_action
+	flow 128642 "<flow>"
+	  on activityaction_ref 128770 // activity action CreateVelocity
+	end
+      end
+
+      activityaction 128642 "Init.doInit()"
+	opaque_action
+	flow 128386 "<flow>"
+	  on activityaction_ref 128898 // activity action CreateNeighbours
+	end
+      end
+
+      activityaction 128770 "CreateVelocity"
+	opaque_action
+	flow 128770 "<flow>"
+	  on activityaction_ref 129154 // activity action simulate
+	end
+      end
+
+      activityaction 128898 "CreateNeighbours"
+	opaque_action
+	flow 128514 "<flow>"
+	  on activityaction_ref 128514 // activity action CreateForce
+	end
+      end
+
+      activityaction 129026 "CreateOutput"
+	opaque_action
+	flow 129026 "<flow>"
+	  on activityaction_ref 129282 // activity action GetResults
+	end
+      end
+
+      activityaction 129154 "simulate"
+	opaque_action
+	flow 128898 "<flow>"
+	  on activityaction_ref 129026 // activity action CreateOutput
+	end
+      end
+
+      activitynode 128386 activity_final ""
+      end
+
+      activityaction 129282 "GetResults"
+	opaque_action
+	flow 129154 "<flow>"
+	  on activitynode_ref 128386 // activity_final
+	end
+      end
+    end
+
+    class 413570 "MDS"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 494722 "main"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param in name "args" explicit_type "String []"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "A main program used to run a simulation"
+      end
+
+      classrelation 406146 // <dependency>
+	relation 403458 -_->
+	  a public
+	    classrelation_ref 406146 // <dependency>
+	  b parent class_ref 238082 // MDSRun
+      end
+
+      simplerelation 305282
+	-_->
+	  stereotype "import"
+	  on 
+	  package_ref 128002 // GlobalView
+      end
+    end
+  end
+
+  deploymentview 134530 "mdsModule"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 251266 "MDSRun"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 238082 // MDSRun
+      end
+    end
+
+    artifact 264322 "MDS"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 413570 // MDS
+      end
+    end
+  end
+end

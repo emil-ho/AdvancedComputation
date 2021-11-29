@@ -1,0 +1,9 @@
+class Velocity
+!!!302850.java!!!	createVelocity(in s : State, in f : IForce) : IVelocity
+
+		  return new Velocity(s, f);
+!!!302978.java!!!	Velocity(in s : State, in f : IForce)
+	this.s = s;
+	this.f = f;
+!!!303234.java!!!	calcVelocity() : double
+return 0;

@@ -1,0 +1,164 @@
+format 222
+
+classcanvas 128130 class_ref 128258 // State
+  classdiagramsettings member_max_width 0 end
+  xyz 501.6 100.6 2000
+end
+classcanvas 128258 class_ref 128386 // Particle
+  classdiagramsettings member_max_width 0 end
+  xyz 935.2 286.2 2000
+end
+classcanvas 129282 class_ref 135170 // R2Point
+  classdiagramsettings member_max_width 0 end
+  xyz 1075.2 539.7 2000
+end
+classcanvas 129410 class_ref 135298 // Graph
+  classdiagramsettings member_max_width 0 end
+  xyz 725.2 559.9 2000
+end
+classcanvas 129666 class_ref 136194 // InputData
+  classdiagramsettings member_max_width 0 end
+  xyz 60.9 74.6 2000
+end
+classcanvas 129794 class_ref 231426 // R3Point
+  classdiagramsettings member_max_width 0 end
+  xyz 985.1 717.4 2000
+end
+classcanvas 130178 class_ref 264450 // EnergyLog
+  classdiagramsettings member_max_width 0 end
+  xyz 678.1 295 2000
+end
+classcanvas 130818 class_ref 309762 // Cloneable
+  classdiagramsettings member_max_width 0 end
+  xyz 1304.2 314 2000
+end
+classcanvas 131842 class_ref 176130 // ResultsFiles
+  classdiagramsettings member_max_width 0 end
+  xyz 628.3 696.4 2005
+end
+classcanvas 132866 class_ref 316418 // TypeOfPotential
+  classdiagramsettings member_max_width 0 end
+  xyz 360 598 3005
+end
+classcanvas 133122 class_ref 316546 // VelocityComputingAlgorithm
+  classdiagramsettings member_max_width 0 end
+  xyz 295 888 3005
+end
+classcanvas 133378 class_ref 323074 // UnitSystems
+  classdiagramsettings member_max_width 0 end
+  xyz 148 709 3005
+end
+classcanvas 133634 class_ref 316290 // TypeOfCellLattice
+  classdiagramsettings member_max_width 0 end
+  xyz 6 860 3005
+end
+relationcanvas 128386 relation_ref 128002 // <directional aggregation>
+  decenter_end 330
+  from ref 128130 z 2001 stereotype "<<list>>" xyz 1024 139 3000 to point 1039 157
+  line 131970 z 2001 to ref 128258
+  role_a_pos 1052 264 3000 no_role_b
+  multiplicity_a_pos 1027 264 3000 no_multiplicity_b
+end
+relationcanvas 128514 relation_ref 134530 // <directional aggregation>
+  decenter_begin 92
+  decenter_end 643
+  from ref 128258 z 2001 stereotype "<<set>>" xyz 1218 190 3000 to point 1289 298
+  line 128642 z 2001 to point 1289 224
+  line 131714 z 2001 to point 1140 224
+  line 128898 z 2001 to ref 128258
+  role_a_pos 1155 264 3000 no_role_b
+  multiplicity_a_pos 1130 264 3000 no_multiplicity_b
+end
+relationcanvas 129538 relation_ref 141058 // <directional aggregation>
+  from ref 129410 z 2001 stereotype "<<list>>" xyz 989.5 598 3000 to ref 129282
+  role_a_pos 1029 575 3000 no_role_b
+  multiplicity_a_pos 1059 604 3000 no_multiplicity_b
+end
+relationcanvas 130306 relation_ref 222210 // <directional aggregation>
+  from ref 128130 z 2001 to ref 130178
+  role_a_pos 742 273 3000 no_role_b
+  multiplicity_a_pos 715 273 3000 no_multiplicity_b
+end
+relationcanvas 130434 relation_ref 222338 // <directional aggregation>
+  decenter_begin 486
+  from ref 129666 z 2001 stereotype "<<list>>" xyz 441 307 3000 to ref 130178
+  role_a_pos 607 314 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130562 relation_ref 222466 // <generalisation>
+  decenter_begin 652
+  from ref 129794 z 2001 to ref 129282
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130690 relation_ref 233730 // <directional aggregation>
+  decenter_begin 160
+  from ref 129666 z 2001 stereotype "<<list>>" xyz 393.5 145.5 3000 to ref 128130
+  role_a_pos 457 138 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130946 relation_ref 267138 // <realization>
+  decenter_begin 791
+  from ref 128258 z 2001 to point 1337 420
+  line 131074 z 2001 to ref 130818
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131202 relation_ref 267266 // <realization>
+  from ref 129794 z 2001 to point 1335 765
+  line 131586 z 2001 to ref 130818
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131330 relation_ref 267394 // <realization>
+  from ref 129282 z 2001 to point 1335 586
+  line 131458 z 2001 to ref 130818
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132098 relation_ref 357250 // <realization>
+  from ref 130178 z 2001 to point 733 476
+  line 133890 z 2001 to point 1337 477
+  line 132226 z 2001 to ref 130818
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132482 relation_ref 371074 // <unidirectional association>
+  from ref 129666 z 2001 to ref 129410
+  role_a_pos 595 540 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132610 relation_ref 371714 // <unidirectional association>
+  from ref 129666 z 2001 to point 624 600
+  line 134146 z 2001 to ref 129410
+  role_a_pos 630 577 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132738 relation_ref 371842 // <unidirectional association>
+  decenter_end 449
+  from ref 129666 z 2001 to point 818 519
+  line 134018 z 2001 to ref 129410
+  role_a_pos 830 537 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132994 relation_ref 370562 // <unidirectional association>
+  from ref 129666 z 3006 to ref 132866
+  role_a_pos 429 576 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133250 relation_ref 370946 // <unidirectional association>
+  from ref 129666 z 3006 to ref 133122
+  role_a_pos 418 866 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133506 relation_ref 370434 // <unidirectional association>
+  from ref 129666 z 3006 to ref 133378
+  role_a_pos 239 687 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133762 relation_ref 370690 // <unidirectional association>
+  from ref 129666 z 3006 to ref 133634
+  role_a_pos 106 838 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

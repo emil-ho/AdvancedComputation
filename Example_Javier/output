@@ -1,0 +1,560 @@
+
+                    ******************************       
+                    *  WELCOME TO LENNARD-JONES  *       
+                    ******************************       
+
+reinit: Reading from standard input
+************************** Dump of input data file ****************************
+NumberFCCUnits     3         # Number of FCC unit cells in each direction in
+                             #   the supercell
+ReducedDensity     0.8442    # Reduced density (adimensional)
+ReducedTemperature 0.722     # Reduced temperature (adimensional)
+Sigma              0.341 nm  # Parameter sigma   of the Lennard-Jones potential
+Epsilon            119.8 K   # Parameter epsilon of the Lennard-Jones potential
+CutoffPotential    2.5       # Cutoff distance for truncation of
+                             #    intermolecular potential (in units of sigma)
+CutoffList         2.7       # Cutoff distance for the computation of
+                             #    Verlet neighbour list (in units of sigma)
+NumberOfSteps      100       # Number of steps in the Molecular Dynamic simulations
+ReducedTimeStep    0.005     # Reduced time step
+WidthBinPairDistributionFunction 0.1 # Width of the bins in the histogram
+                             #   to compute the pair distribution function
+%block ChemicalSpeciesLabel
+ 1  18  Ar
+%endblock ChemicalSpeciesLabel
+TypeOfPotential    potential_and_force_shifted
+************************** End of input data file *****************************
+
+redata: Number of fcc units in each direction  =        3
+redata: Reduced density                        =     0.8442
+redata: Sigma                                  =     3.4100 Ang
+redata: Epsilon                                =   119.8000 K
+redata: Reduced temperature                    =     0.7220
+redata: Temperature                            =    86.4956 K
+redata: Cutoff distance for potential truncation (in sigma) =     2.5000
+redata: Cutoff distance for potential truncation (in Ang)   =     8.5250 Ang
+redata: Cutoff distance for neighbour list (in sigma)       =     2.7000
+redata: Cutoff distance for neighbour list (in Ang)         =     9.2070 Ang
+redata: Number of steps in the MD simulation   =      100
+redata: Reduced time step                      =     0.0050
+redata: Type of potential                      =     potentialandforceshifted 
+redata: Width of the bin in the histogram for pdf (in sigma)=     0.1000
+redata: Width of the bin in the histogram for pdf (in Ang)  =     0.3410 Ang
+ Species number:            1  Label: Ar Atomic number:          18
+
+setup_latcon: Lattice constant                 =     5.7274  Ang
+lennardjones: Number of atoms in the supercell =      108
+setup_neighbour_list: Updating the neighbour list
+potential_force:       Potential energy =   -614.87405
+kinetic_energy:        Kinetic   energy =    120.20756
+compute_total_energy:  Total     energy =   -494.66649
+
+lennardjones:  MD step =     1
+potential_force:       Potential energy =   -614.67533
+kinetic_energy:        Kinetic   energy =    120.00801
+compute_total_energy:  Total     energy =   -494.66732
+
+lennardjones:  MD step =     2
+potential_force:       Potential energy =   -614.07097
+kinetic_energy:        Kinetic   energy =    119.40187
+compute_total_energy:  Total     energy =   -494.66911
+
+lennardjones:  MD step =     3
+potential_force:       Potential energy =   -613.04083
+kinetic_energy:        Kinetic   energy =    118.36901
+compute_total_energy:  Total     energy =   -494.67182
+
+lennardjones:  MD step =     4
+potential_force:       Potential energy =   -611.55481
+kinetic_energy:        Kinetic   energy =    116.87944
+compute_total_energy:  Total     energy =   -494.67538
+
+lennardjones:  MD step =     5
+potential_force:       Potential energy =   -609.57436
+kinetic_energy:        Kinetic   energy =    114.89474
+compute_total_energy:  Total     energy =   -494.67962
+
+lennardjones:  MD step =     6
+potential_force:       Potential energy =   -607.05505
+kinetic_energy:        Kinetic   energy =    112.37078
+compute_total_energy:  Total     energy =   -494.68428
+
+lennardjones:  MD step =     7
+potential_force:       Potential energy =   -603.95123
+kinetic_energy:        Kinetic   energy =    109.26237
+compute_total_energy:  Total     energy =   -494.68887
+
+lennardjones:  MD step =     8
+potential_force:       Potential energy =   -600.22329
+kinetic_energy:        Kinetic   energy =    105.53062
+compute_total_energy:  Total     energy =   -494.69267
+
+lennardjones:  MD step =     9
+setup_neighbour_list: Updating the neighbour list
+potential_force:       Potential energy =   -595.84848
+kinetic_energy:        Kinetic   energy =    101.15380
+compute_total_energy:  Total     energy =   -494.69468
+
+lennardjones:  MD step =    10
+potential_force:       Potential energy =   -590.83533
+kinetic_energy:        Kinetic   energy =     96.14159
+compute_total_energy:  Total     energy =   -494.69373
+
+lennardjones:  MD step =    11
+potential_force:       Potential energy =   -585.24014
+kinetic_energy:        Kinetic   energy =     90.55146
+compute_total_energy:  Total     energy =   -494.68868
+
+lennardjones:  MD step =    12
+potential_force:       Potential energy =   -579.18195
+kinetic_energy:        Kinetic   energy =     84.50300
+compute_total_energy:  Total     energy =   -494.67895
+
+lennardjones:  MD step =    13
+potential_force:       Potential energy =   -572.84882
+kinetic_energy:        Kinetic   energy =     78.18383
+compute_total_energy:  Total     energy =   -494.66498
+
+lennardjones:  MD step =    14
+potential_force:       Potential energy =   -566.48819
+kinetic_energy:        Kinetic   energy =     71.83952
+compute_total_energy:  Total     energy =   -494.64867
+
+lennardjones:  MD step =    15
+potential_force:       Potential energy =   -560.37712
+kinetic_energy:        Kinetic   energy =     65.74420
+compute_total_energy:  Total     energy =   -494.63293
+
+lennardjones:  MD step =    16
+potential_force:       Potential energy =   -554.77785
+kinetic_energy:        Kinetic   energy =     60.15714
+compute_total_energy:  Total     energy =   -494.62071
+
+lennardjones:  MD step =    17
+potential_force:       Potential energy =   -549.89388
+kinetic_energy:        Kinetic   energy =     55.28013
+compute_total_energy:  Total     energy =   -494.61375
+
+lennardjones:  MD step =    18
+potential_force:       Potential energy =   -545.84414
+kinetic_energy:        Kinetic   energy =     51.23215
+compute_total_energy:  Total     energy =   -494.61199
+
+lennardjones:  MD step =    19
+setup_neighbour_list: Updating the neighbour list
+potential_force:       Potential energy =   -542.66293
+kinetic_energy:        Kinetic   energy =     48.04886
+compute_total_energy:  Total     energy =   -494.61407
+
+lennardjones:  MD step =    20
+potential_force:       Potential energy =   -540.31934
+kinetic_energy:        Kinetic   energy =     45.70100
+compute_total_energy:  Total     energy =   -494.61833
+
+lennardjones:  MD step =    21
+potential_force:       Potential energy =   -538.74240
+kinetic_energy:        Kinetic   energy =     44.11885
+compute_total_energy:  Total     energy =   -494.62355
+
+lennardjones:  MD step =    22
+potential_force:       Potential energy =   -537.84091
+kinetic_energy:        Kinetic   energy =     43.21181
+compute_total_energy:  Total     energy =   -494.62910
+
+lennardjones:  MD step =    23
+potential_force:       Potential energy =   -537.51477
+kinetic_energy:        Kinetic   energy =     42.88003
+compute_total_energy:  Total     energy =   -494.63474
+
+lennardjones:  MD step =    24
+potential_force:       Potential energy =   -537.66061
+kinetic_energy:        Kinetic   energy =     43.02026
+compute_total_energy:  Total     energy =   -494.64035
+
+lennardjones:  MD step =    25
+potential_force:       Potential energy =   -538.17533
+kinetic_energy:        Kinetic   energy =     43.52960
+compute_total_energy:  Total     energy =   -494.64573
+
+lennardjones:  MD step =    26
+potential_force:       Potential energy =   -538.96005
+kinetic_energy:        Kinetic   energy =     44.30944
+compute_total_energy:  Total     energy =   -494.65061
+
+lennardjones:  MD step =    27
+potential_force:       Potential energy =   -539.92486
+kinetic_energy:        Kinetic   energy =     45.27017
+compute_total_energy:  Total     energy =   -494.65469
+
+lennardjones:  MD step =    28
+potential_force:       Potential energy =   -540.99366
+kinetic_energy:        Kinetic   energy =     46.33594
+compute_total_energy:  Total     energy =   -494.65772
+
+lennardjones:  MD step =    29
+potential_force:       Potential energy =   -542.10806
+kinetic_energy:        Kinetic   energy =     47.44849
+compute_total_energy:  Total     energy =   -494.65956
+
+lennardjones:  MD step =    30
+setup_neighbour_list: Updating the neighbour list
+potential_force:       Potential energy =   -543.22924
+kinetic_energy:        Kinetic   energy =     48.56895
+compute_total_energy:  Total     energy =   -494.66029
+
+lennardjones:  MD step =    31
+potential_force:       Potential energy =   -544.33685
+kinetic_energy:        Kinetic   energy =     49.67668
+compute_total_energy:  Total     energy =   -494.66017
+
+lennardjones:  MD step =    32
+potential_force:       Potential energy =   -545.42466
+kinetic_energy:        Kinetic   energy =     50.76499
+compute_total_energy:  Total     energy =   -494.65967
+
+lennardjones:  MD step =    33
+potential_force:       Potential energy =   -546.49350
+kinetic_energy:        Kinetic   energy =     51.83420
+compute_total_energy:  Total     energy =   -494.65930
+
+lennardjones:  MD step =    34
+potential_force:       Potential energy =   -547.54378
+kinetic_energy:        Kinetic   energy =     52.88439
+compute_total_energy:  Total     energy =   -494.65939
+
+lennardjones:  MD step =    35
+potential_force:       Potential energy =   -548.57026
+kinetic_energy:        Kinetic   energy =     53.91027
+compute_total_energy:  Total     energy =   -494.66000
+
+lennardjones:  MD step =    36
+potential_force:       Potential energy =   -549.56105
+kinetic_energy:        Kinetic   energy =     54.90017
+compute_total_energy:  Total     energy =   -494.66088
+
+lennardjones:  MD step =    37
+potential_force:       Potential energy =   -550.50071
+kinetic_energy:        Kinetic   energy =     55.83901
+compute_total_energy:  Total     energy =   -494.66170
+
+lennardjones:  MD step =    38
+potential_force:       Potential energy =   -551.37502
+kinetic_energy:        Kinetic   energy =     56.71281
+compute_total_energy:  Total     energy =   -494.66220
+
+lennardjones:  MD step =    39
+potential_force:       Potential energy =   -552.17452
+kinetic_energy:        Kinetic   energy =     57.51218
+compute_total_energy:  Total     energy =   -494.66233
+
+lennardjones:  MD step =    40
+potential_force:       Potential energy =   -552.89541
+kinetic_energy:        Kinetic   energy =     58.23323
+compute_total_energy:  Total     energy =   -494.66218
+
+lennardjones:  MD step =    41
+setup_neighbour_list: Updating the neighbour list
+potential_force:       Potential energy =   -553.53831
+kinetic_energy:        Kinetic   energy =     58.87641
+compute_total_energy:  Total     energy =   -494.66189
+
+lennardjones:  MD step =    42
+potential_force:       Potential energy =   -554.10643
+kinetic_energy:        Kinetic   energy =     59.44492
+compute_total_energy:  Total     energy =   -494.66152
+
+lennardjones:  MD step =    43
+potential_force:       Potential energy =   -554.60482
+kinetic_energy:        Kinetic   energy =     59.94379
+compute_total_energy:  Total     energy =   -494.66103
+
+lennardjones:  MD step =    44
+potential_force:       Potential energy =   -555.04055
+kinetic_energy:        Kinetic   energy =     60.38017
+compute_total_energy:  Total     energy =   -494.66039
+
+lennardjones:  MD step =    45
+potential_force:       Potential energy =   -555.42332
+kinetic_energy:        Kinetic   energy =     60.76373
+compute_total_energy:  Total     energy =   -494.65960
+
+lennardjones:  MD step =    46
+potential_force:       Potential energy =   -555.76522
+kinetic_energy:        Kinetic   energy =     61.10646
+compute_total_energy:  Total     energy =   -494.65876
+
+lennardjones:  MD step =    47
+potential_force:       Potential energy =   -556.07926
+kinetic_energy:        Kinetic   energy =     61.42121
+compute_total_energy:  Total     energy =   -494.65805
+
+lennardjones:  MD step =    48
+potential_force:       Potential energy =   -556.37688
+kinetic_energy:        Kinetic   energy =     61.71925
+compute_total_energy:  Total     energy =   -494.65762
+
+lennardjones:  MD step =    49
+potential_force:       Potential energy =   -556.66557
+kinetic_energy:        Kinetic   energy =     62.00801
+compute_total_energy:  Total     energy =   -494.65757
+
+lennardjones:  MD step =    50
+setup_neighbour_list: Updating the neighbour list
+potential_force:       Potential energy =   -556.94757
+kinetic_energy:        Kinetic   energy =     62.28973
+compute_total_energy:  Total     energy =   -494.65785
+
+lennardjones:  MD step =    51
+potential_force:       Potential energy =   -557.22021
+kinetic_energy:        Kinetic   energy =     62.56188
+compute_total_energy:  Total     energy =   -494.65833
+
+lennardjones:  MD step =    52
+potential_force:       Potential energy =   -557.47764
+kinetic_energy:        Kinetic   energy =     62.81880
+compute_total_energy:  Total     energy =   -494.65884
+
+lennardjones:  MD step =    53
+potential_force:       Potential energy =   -557.71317
+kinetic_energy:        Kinetic   energy =     63.05391
+compute_total_energy:  Total     energy =   -494.65926
+
+lennardjones:  MD step =    54
+potential_force:       Potential energy =   -557.92099
+kinetic_energy:        Kinetic   energy =     63.26145
+compute_total_energy:  Total     energy =   -494.65954
+
+lennardjones:  MD step =    55
+potential_force:       Potential energy =   -558.09679
+kinetic_energy:        Kinetic   energy =     63.43708
+compute_total_energy:  Total     energy =   -494.65970
+
+lennardjones:  MD step =    56
+potential_force:       Potential energy =   -558.23728
+kinetic_energy:        Kinetic   energy =     63.57746
+compute_total_energy:  Total     energy =   -494.65983
+
+lennardjones:  MD step =    57
+potential_force:       Potential energy =   -558.33936
+kinetic_energy:        Kinetic   energy =     63.67943
+compute_total_energy:  Total     energy =   -494.65994
+
+lennardjones:  MD step =    58
+potential_force:       Potential energy =   -558.39960
+kinetic_energy:        Kinetic   energy =     63.73959
+compute_total_energy:  Total     energy =   -494.66001
+
+lennardjones:  MD step =    59
+setup_neighbour_list: Updating the neighbour list
+potential_force:       Potential energy =   -558.41470
+kinetic_energy:        Kinetic   energy =     63.75474
+compute_total_energy:  Total     energy =   -494.65996
+
+lennardjones:  MD step =    60
+potential_force:       Potential energy =   -558.38284
+kinetic_energy:        Kinetic   energy =     63.72317
+compute_total_energy:  Total     energy =   -494.65967
+
+lennardjones:  MD step =    61
+potential_force:       Potential energy =   -558.30547
+kinetic_energy:        Kinetic   energy =     63.64642
+compute_total_energy:  Total     energy =   -494.65905
+
+lennardjones:  MD step =    62
+potential_force:       Potential energy =   -558.18871
+kinetic_energy:        Kinetic   energy =     63.53066
+compute_total_energy:  Total     energy =   -494.65805
+
+lennardjones:  MD step =    63
+potential_force:       Potential energy =   -558.04394
+kinetic_energy:        Kinetic   energy =     63.38720
+compute_total_energy:  Total     energy =   -494.65674
+
+lennardjones:  MD step =    64
+potential_force:       Potential energy =   -557.88689
+kinetic_energy:        Kinetic   energy =     63.23161
+compute_total_energy:  Total     energy =   -494.65527
+
+lennardjones:  MD step =    65
+potential_force:       Potential energy =   -557.73562
+kinetic_energy:        Kinetic   energy =     63.08178
+compute_total_energy:  Total     energy =   -494.65384
+
+lennardjones:  MD step =    66
+potential_force:       Potential energy =   -557.60779
+kinetic_energy:        Kinetic   energy =     62.95518
+compute_total_energy:  Total     energy =   -494.65261
+
+lennardjones:  MD step =    67
+potential_force:       Potential energy =   -557.51814
+kinetic_energy:        Kinetic   energy =     62.86643
+compute_total_energy:  Total     energy =   -494.65171
+
+lennardjones:  MD step =    68
+potential_force:       Potential energy =   -557.47653
+kinetic_energy:        Kinetic   energy =     62.82530
+compute_total_energy:  Total     energy =   -494.65123
+
+lennardjones:  MD step =    69
+potential_force:       Potential energy =   -557.48688
+kinetic_energy:        Kinetic   energy =     62.83569
+compute_total_energy:  Total     energy =   -494.65119
+
+lennardjones:  MD step =    70
+setup_neighbour_list: Updating the neighbour list
+potential_force:       Potential energy =   -557.54679
+kinetic_energy:        Kinetic   energy =     62.89524
+compute_total_energy:  Total     energy =   -494.65156
+
+lennardjones:  MD step =    71
+potential_force:       Potential energy =   -557.64812
+kinetic_energy:        Kinetic   energy =     62.99585
+compute_total_energy:  Total     energy =   -494.65227
+
+lennardjones:  MD step =    72
+potential_force:       Potential energy =   -557.77784
+kinetic_energy:        Kinetic   energy =     63.12458
+compute_total_energy:  Total     energy =   -494.65326
+
+lennardjones:  MD step =    73
+potential_force:       Potential energy =   -557.91932
+kinetic_energy:        Kinetic   energy =     63.26489
+compute_total_energy:  Total     energy =   -494.65443
+
+lennardjones:  MD step =    74
+potential_force:       Potential energy =   -558.05381
+kinetic_energy:        Kinetic   energy =     63.39814
+compute_total_energy:  Total     energy =   -494.65567
+
+lennardjones:  MD step =    75
+potential_force:       Potential energy =   -558.16217
+kinetic_energy:        Kinetic   energy =     63.50531
+compute_total_energy:  Total     energy =   -494.65686
+
+lennardjones:  MD step =    76
+potential_force:       Potential energy =   -558.22686
+kinetic_energy:        Kinetic   energy =     63.56903
+compute_total_energy:  Total     energy =   -494.65783
+
+lennardjones:  MD step =    77
+potential_force:       Potential energy =   -558.23439
+kinetic_energy:        Kinetic   energy =     63.57600
+compute_total_energy:  Total     energy =   -494.65839
+
+lennardjones:  MD step =    78
+potential_force:       Potential energy =   -558.17821
+kinetic_energy:        Kinetic   energy =     63.51989
+compute_total_energy:  Total     energy =   -494.65832
+
+lennardjones:  MD step =    79
+setup_neighbour_list: Updating the neighbour list
+potential_force:       Potential energy =   -558.06165
+kinetic_energy:        Kinetic   energy =     63.40421
+compute_total_energy:  Total     energy =   -494.65744
+
+lennardjones:  MD step =    80
+potential_force:       Potential energy =   -557.90031
+kinetic_energy:        Kinetic   energy =     63.24460
+compute_total_energy:  Total     energy =   -494.65571
+
+lennardjones:  MD step =    81
+potential_force:       Potential energy =   -557.72248
+kinetic_energy:        Kinetic   energy =     63.06924
+compute_total_energy:  Total     energy =   -494.65324
+
+lennardjones:  MD step =    82
+potential_force:       Potential energy =   -557.56697
+kinetic_energy:        Kinetic   energy =     62.91659
+compute_total_energy:  Total     energy =   -494.65038
+
+lennardjones:  MD step =    83
+potential_force:       Potential energy =   -557.47783
+kinetic_energy:        Kinetic   energy =     62.83021
+compute_total_energy:  Total     energy =   -494.64763
+
+lennardjones:  MD step =    84
+potential_force:       Potential energy =   -557.49675
+kinetic_energy:        Kinetic   energy =     62.85121
+compute_total_energy:  Total     energy =   -494.64554
+
+lennardjones:  MD step =    85
+potential_force:       Potential energy =   -557.65477
+kinetic_energy:        Kinetic   energy =     63.01021
+compute_total_energy:  Total     energy =   -494.64456
+
+lennardjones:  MD step =    86
+potential_force:       Potential energy =   -557.96564
+kinetic_energy:        Kinetic   energy =     63.32073
+compute_total_energy:  Total     energy =   -494.64492
+
+lennardjones:  MD step =    87
+potential_force:       Potential energy =   -558.42252
+kinetic_energy:        Kinetic   energy =     63.77597
+compute_total_energy:  Total     energy =   -494.64655
+
+lennardjones:  MD step =    88
+setup_neighbour_list: Updating the neighbour list
+potential_force:       Potential energy =   -558.99889
+kinetic_energy:        Kinetic   energy =     64.34974
+compute_total_energy:  Total     energy =   -494.64915
+
+lennardjones:  MD step =    89
+potential_force:       Potential energy =   -559.65303
+kinetic_energy:        Kinetic   energy =     65.00073
+compute_total_energy:  Total     energy =   -494.65229
+
+lennardjones:  MD step =    90
+potential_force:       Potential energy =   -560.33457
+kinetic_energy:        Kinetic   energy =     65.67903
+compute_total_energy:  Total     energy =   -494.65554
+
+lennardjones:  MD step =    91
+potential_force:       Potential energy =   -560.99126
+kinetic_energy:        Kinetic   energy =     66.33274
+compute_total_energy:  Total     energy =   -494.65851
+
+lennardjones:  MD step =    92
+potential_force:       Potential energy =   -561.57467
+kinetic_energy:        Kinetic   energy =     66.91368
+compute_total_energy:  Total     energy =   -494.66099
+
+lennardjones:  MD step =    93
+potential_force:       Potential energy =   -562.04410
+kinetic_energy:        Kinetic   energy =     67.38125
+compute_total_energy:  Total     energy =   -494.66284
+
+lennardjones:  MD step =    94
+potential_force:       Potential energy =   -562.36863
+kinetic_energy:        Kinetic   energy =     67.70457
+compute_total_energy:  Total     energy =   -494.66406
+
+lennardjones:  MD step =    95
+potential_force:       Potential energy =   -562.52784
+kinetic_energy:        Kinetic   energy =     67.86318
+compute_total_energy:  Total     energy =   -494.66466
+
+lennardjones:  MD step =    96
+potential_force:       Potential energy =   -562.51168
+kinetic_energy:        Kinetic   energy =     67.84700
+compute_total_energy:  Total     energy =   -494.66468
+
+lennardjones:  MD step =    97
+potential_force:       Potential energy =   -562.32019
+kinetic_energy:        Kinetic   energy =     67.65605
+compute_total_energy:  Total     energy =   -494.66414
+
+lennardjones:  MD step =    98
+setup_neighbour_list: Updating the neighbour list
+potential_force:       Potential energy =   -561.96332
+kinetic_energy:        Kinetic   energy =     67.30031
+compute_total_energy:  Total     energy =   -494.66301
+
+lennardjones:  MD step =    99
+potential_force:       Potential energy =   -561.46091
+kinetic_energy:        Kinetic   energy =     66.79958
+compute_total_energy:  Total     energy =   -494.66133
+
+lennardjones:  MD step =   100
+potential_force:       Potential energy =   -560.84228
+kinetic_energy:        Kinetic   energy =     66.18310
+compute_total_energy:  Total     energy =   -494.65918
