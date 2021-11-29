@@ -1,0 +1,24 @@
+window_sizes 1914 1005 433 1475 795 156
+
+diagrams
+  active  classdiagram_ref 193794 // mdsClassDiagram
+    1184 747 100 A4 218 0
+end
+show_stereotypes
+selected operation_ref 467714 // simulation
+open
+  
+package_ref 128002 // GlobalView
+  class_ref 238082 // MDSRun
+  class_ref 413570 // MDS
+  deploymentview_ref 134530 // mdsModule
+  
+package_ref 129154 // Neighbours
+  
+package_ref 128898 // Velocity
+  
+package_ref 128770 // Force
+  
+package_ref 207234 // Output
+end
+end

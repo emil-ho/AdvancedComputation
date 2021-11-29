@@ -1,0 +1,9 @@
+class Init
+!!!488194.java!!!	createInit() : IInit
+return new Init();
+!!!289026.java!!!	doInit(in experiment : InputData) : State
+return new State();
+!!!289154.java!!!	velocityDistribution(in s : State) : Graph
+return null;
+!!!289282.java!!!	getInitialVelocityDistribution() : Graph
+    return initialVelocityDistribution;

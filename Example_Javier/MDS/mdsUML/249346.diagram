@@ -1,0 +1,60 @@
+format 222
+
+classcanvas 128002 class_ref 303234 // Force
+  classdiagramsettings member_max_width 0 end
+  xyz 341 196 2000
+end
+packagecanvas 128130 
+  package_ref 128002 // GlobalView
+    xyzwh 802 232 2006 73 81
+end
+classcanvas 128386 class_ref 128002 // IForce
+  classdiagramsettings member_max_width 0 end
+  xyz 346 25 2000
+end
+classcanvas 130178 class_ref 336514 // LennardJones
+  classdiagramsettings member_max_width 0 end
+  xyz 431 551 2012
+end
+classcanvas 130434 class_ref 336642 // Buckingham
+  classdiagramsettings member_max_width 0 end
+  xyz 92 546 2012
+end
+classcanvas 130690 class_ref 336770 // Hardwell
+  classdiagramsettings member_max_width 0 end
+  xyz 760 548 2012
+end
+simplerelationcanvas 128258 simplerelation_ref 167298
+  from ref 128002 z 2007 stereotype "<<import>>" xyz 613 354.5 2007 to ref 128130
+end
+relationcanvas 128514 relation_ref 260610 // <realization>
+  from ref 128002 z 2001 to ref 128386
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+simplerelationcanvas 130306 simplerelation_ref 187650
+  from ref 130178 z 2013 stereotype "<<import>>" xyz 667 431 2013 to ref 128130
+end
+simplerelationcanvas 130562 simplerelation_ref 187778
+  from ref 130434 z 2013 stereotype "<<import>>" xyz 521 417 2013 to ref 128130
+end
+simplerelationcanvas 130818 simplerelation_ref 187906
+  from ref 130690 z 2013 stereotype "<<import>>" xyz 830 428 2013 to ref 128130
+end
+relationcanvas 130946 relation_ref 396674 // <generalisation>
+  from ref 130434 z 2013 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131074 relation_ref 396802 // <generalisation>
+  from ref 130178 z 2013 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131202 relation_ref 396930 // <generalisation>
+  decenter_begin 298
+  from ref 130690 z 2013 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

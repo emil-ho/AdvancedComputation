@@ -1,0 +1,521 @@
+format 222
+"Output" // Output
+  revision 43
+  modified_by 2 "julio"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "mds/output/"
+  java_package "mds.output"
+  classview 208386 "ClassView"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    associated_deployment_view deploymentview_ref 154242 // outputModule
+    classdiagram 306306 "outputClassDiagram"
+      classdiagramsettings draw_all_relations no show_members_full_definition yes show_members_visibility yes member_max_width 0 show_parameter_dir no end
+      size A3
+    end
+
+    class 386946 "Output"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      associated_diagram classdiagram_ref 306306 // outputClassDiagram
+      classrelation 353410 // <realization>
+	relation 350722 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 353410 // <realization>
+	  b parent class_ref 224642 // IOutput
+      end
+
+      classrelation 374018 // experiment (<unidirectional association>)
+	relation 371330 --->
+	  a role_name "experiment" private
+	    comment "
+The experiment object, with (almost) all information to generate output, with particles positions
+and with all constants necesary to convert units.
+
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 374018 // experiment (<unidirectional association>)
+	  b parent class_ref 136194 // InputData
+      end
+
+      classrelation 374146 // resultsFiles (<unidirectional association>)
+	relation 371458 --->
+	  a role_name "resultsFiles" private
+	    comment "
+The results files object, whose names are taken, edited (with the extension), and then returned.
+
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 374146 // resultsFiles (<unidirectional association>)
+	  b parent class_ref 176130 // ResultsFiles
+      end
+
+      classrelation 374274 // files (<unidirectional association>)
+	relation 371586 --->
+	  a role_name "files" private
+	    comment "
+The object of the inner class resultFiles. To be created only once, and used by all private methods.
+
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 374274 // files (<unidirectional association>)
+	  b parent class_ref 387074 // OutputTextFiles
+      end
+
+      operation 439042 "createOutput"
+	class_operation public return_type class_ref 224642 // IOutput
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This static method returns an OutputModule object that implements the interface IOutput.
+It does nothing else, as experiment data is not given yet.
+
+@return an object that implements the interface IOutput"
+      end
+
+      operation 439298 "results"
+	public explicit_return_type "ResultsFiles"
+	nparams 2
+	  param in name "experiment" type class_ref 136194 // InputData
+	  param in name "resultsFiles" type class_ref 176130 // ResultsFiles
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This makes the results for the experiment, making the text files and the plots. The names
+of all the files are written in the resultFiles object (overwritng it).
+	@param experiment Is the experiment object with the data needed to retrive
+the simulation results (without the extensions).
+	@return returns The ResultsFile object with the names of all the requested 
+resulting images and data files generated. If any of those files could not 
+be generated the corresponding string would be a null reference. This includes the
+extensions of each file. Also, this is the same as the resultFiles given object."
+      end
+
+      operation 439170 "Output"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This creates the output object (but does nothing else)."
+      end
+
+      operation 439682 "energyPlot"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This creates the energy plot (with the kinetic energy, the potential energy and the total
+one as function of the step number). It gives the image and a text file with data. The names
+of the files are writen in files, the object from ResultsFiles.
+"
+      end
+
+      operation 439426 "velocityPlot"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This method generates the output for the initial velocity histogram. It both generates an
+image and a text file, and register it's names in files, from resultsFiles object.
+"
+      end
+
+      operation 439554 "pairDistributionPlot"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This generates a pair distribution function plot. It both represents it in an image and
+writes the data in a text file. Then, the names of those files are included in files, the
+object of ResultsFiles."
+      end
+
+      class 387074 "OutputTextFiles"
+	visibility protected 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	operation 481666 "OutputTextFiles"
+	  public explicit_return_type ""
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	  comment "The constructor. Initialization of general features can be done here."
+	end
+
+	operation 439810 "velocityTextFile"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param in name "velocityData" explicit_type "double[][]"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	  comment "Method that makes a .txt file with the velocity (in its units) with the frecuency 
+of each one.
+This .txt file contains 2 columns, one with the velocities and another with the 
+frecuencies.
+	@param velocityData A 2 dimensional array. The first cordinate can be 0
+	(for the x points, velocities) or 1 (for the y points, frequency of them). 
+	The second index refeers to each point. "
+	end
+
+	operation 439938 "pairDistributionTextFile"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param in name "pairDistributionData" explicit_type "double[][]"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	  comment "Method that makes a .txt file with the distance between 2 particles 'r' (in its units),
+the value of the pair distribution function in that point and the value of the potential
+in the same 'r'.
+This .txt file contains 3 columns, one with the values of 'r', another with the
+values of the pair distribution function 'G(r)', and another with the values of the
+potential 'V(r)'.
+	@param pairDistributionData A 3 dimensional array. The first cordinate can be 0 
+	(for the x points, the distances), 1 (for the y points, the values of 'G(r)'),
+	or 2 (for the y points, the values of 'V(r)').
+	 The second index refeers to each point. "
+	end
+
+	operation 440066 "energyTextFile"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param in name "energyData" explicit_type "double [][]"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	  comment "Method that makes a .txt file with the steps and with the potential, kinetic and total
+energy (in its units).
+This .txt file contains 4 columns, one with the steps, another with the values of the 
+potential energies, another with the values of the kinetic energies and the last one
+with the values of the total energy.
+	@param velocityData A 4 dimensional array. The first cordinate can be 0
+	(for the x points, the step), 1 (for the y points, the potential energy),
+	2 (for the y points, the kinetic energy) or 3 (for the y points,
+	the total energy). 
+	The second index refeers to is point. "
+	end
+      end
+
+      class 387202 "OutputMovies"
+	visibility protected 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 347138 "lengthConverterA"
+	  private explicit_type "double"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	  comment "This converts the internal units to Amstrong (for the output in XCryDen).
+"
+	end
+
+	attribute 347266 "velocityConverterA"
+	  private explicit_type "double"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	  comment "The factor to convert the velotity units from internal to the ones of the movies.
+"
+	end
+
+	attribute 347394 "forceConverterA"
+	  private explicit_type "double"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	  comment "The factor to convert the force (or acelerations) units from internal to the ones of the movies.
+"
+	end
+
+	attribute 318082 "nSteps"
+	  private explicit_type "int"
+	  init_value "experiment.movie.size()"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	  comment "This is the number of steps the movie will have.
+"
+	end
+
+	attribute 347522 "nPartCell"
+	  private explicit_type "int"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	  comment "This is the number of atoms the unit cell has. It depends on the kind (FCC or BCC).
+"
+	end
+
+	operation 454530 "OutputMovies"
+	  public explicit_return_type ""
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${)}${throws} {
+  ${body}}
+"
+	  
+	  
+	  
+	  comment "The constructor for OutputMovies, where some features are intitalized (unit conversion...)"
+	end
+
+	operation 440194 "positionMovie"
+	  public explicit_return_type "void"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	  comment "This creates a movie with the particle's positions. It exports a text file which, latter on,
+can be read by xCryDen program (externaly). The name of the file is included in files, the
+objet from ResultsFiles."
+	end
+
+	operation 440322 "velocityMovie"
+	  public explicit_return_type "void"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	  comment "This creates a velocity movie, with the particle's positions and the velocities represented
+as arrows. It exports a text file which, latter on, can be read by xCryDen program
+(externaly). The name of the files are included in files, object from ResultsFiles."
+	end
+
+	operation 440450 "forceMovie"
+	  public explicit_return_type "void"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	  comment "This creates a velocity movie, with the particle's positions and the forces (proportional
+to acelerations) represented as arrows. It exports a text file which, latter on, 
+can be read by xCryDen program (externaly). The name is written in files,
+from ResultsFiles."
+	end
+      end
+
+      simplerelation 230402
+	-_->
+	  stereotype "import"
+	  on 
+	  package_ref 249986 // java.awt
+      end
+
+      classrelation 346754 // <dependency>
+	relation 344066 -_->
+	  a package
+	    java "${type}"
+	    classrelation_ref 346754 // <dependency>
+	  b parent class_ref 176130 // ResultsFiles
+      end
+
+      classrelation 346882 // <dependency>
+	relation 344194 -_->
+	  a default
+	    classrelation_ref 346882 // <dependency>
+	  b parent class_ref 135298 // Graph
+      end
+
+      simplerelation 244098
+	-_->
+	  stereotype "import"
+	  on 
+	  package_ref 128002 // GlobalView
+      end
+
+      simplerelation 271234
+	-_->
+	  stereotype "import"
+	  on 
+	  package_ref 256770 // java.awt.image
+      end
+
+      simplerelation 271362
+	-_->
+	  stereotype "import"
+	  on 
+	  package_ref 256514 // java.io
+      end
+
+      simplerelation 271490
+	-_->
+	  stereotype "import"
+	  on 
+	  package_ref 256898 // javax.imageio
+      end
+    end
+  end
+
+  deploymentview 154242 "outputModule"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 257794 "Output"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 386946 // Output
+      end
+    end
+  end
+end

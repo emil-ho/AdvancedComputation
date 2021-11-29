@@ -1,0 +1,1 @@
+INDEX VERSION 1.126+C:\Users\julio\Documents\julio\prof\ComputacionAvanzada\G80\2020\practice\P4\MDS\ws\.metadata\.plugins\org.eclipse.jdt.core

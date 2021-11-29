@@ -1,0 +1,105 @@
+format 222
+
+classcanvas 128002 class_ref 238082 // MDSRun
+  classdiagramsettings show_members_full_definition yes show_members_visibility yes member_max_width 0 end
+  xyz 260 421 2000
+end
+classcanvas 128130 class_ref 162946 // IMDS
+  classdiagramsettings show_members_full_definition yes show_members_visibility yes member_max_width 0 end
+  xyz 280 237 2005
+end
+classcanvas 128386 class_ref 257666 // ILongSimulationManager
+  classdiagramsettings show_members_full_definition yes show_members_visibility yes member_max_width 0 end
+  xyz 263 25 2000
+end
+packagecanvas 128770 
+  package_ref 128002 // GlobalView
+    xyzwh 59 210 2000 73 81
+end
+packagecanvas 129026 
+  package_ref 128642 // Init
+    xyzwh 64 348 2000 65 81
+end
+packagecanvas 129154 
+  package_ref 128770 // Force
+    xyzwh 73 637 2000 65 81
+end
+packagecanvas 129282 
+  package_ref 128898 // Velocity
+    xyzwh 735 457 2000 65 81
+end
+packagecanvas 129410 
+  package_ref 207234 // Output
+    xyzwh 69 500 2000 65 81
+end
+packagecanvas 129538 
+  package_ref 129154 // Neighbours
+    xyzwh 736 338 2005 73 81
+end
+packagecanvas 130306 
+  package_ref 213762 // java.util
+    xyzwh 742 194 2000 65 81
+end
+classcanvas 130690 class_ref 400386 // Runnable
+  classdiagramsettings member_max_width 0 end
+  xyz 102 41 2000
+end
+classcanvas 131074 class_ref 400514 // RunningState
+  classdiagramsettings member_max_width 0 end
+  xyz 688 583 2006
+end
+classcanvas 131330 class_ref 413570 // MDS
+  classdiagramsettings show_members_full_definition yes show_members_visibility yes show_members_initialization yes member_max_width 0 end
+  xyz 335 830 2000
+end
+relationcanvas 128258 relation_ref 197122 // <realization>
+  from ref 128002 z 2006 to ref 128130
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+simplerelationcanvas 128898 simplerelation_ref 134658
+  from ref 128002 z 2001 stereotype "<<import>>" xyz 166 347 3000 to ref 128770
+end
+simplerelationcanvas 129666 simplerelation_ref 250754
+  from ref 128002 z 2001 stereotype "<<import>>" xyz 159 442 3000 to ref 129026
+end
+simplerelationcanvas 129794 simplerelation_ref 250882
+  from ref 128002 z 2001 stereotype "<<import>>" xyz 161 549 3000 to ref 129410
+end
+simplerelationcanvas 129922 simplerelation_ref 251010
+  from ref 128002 z 2001 stereotype "<<import>>" xyz 189 641 3000 to ref 129154
+end
+simplerelationcanvas 130050 simplerelation_ref 251138
+  from ref 128002 z 2001 stereotype "<<import>>" xyz 636 518 3000 to ref 129282
+end
+simplerelationcanvas 130178 simplerelation_ref 251266
+  from ref 128002 z 2006 stereotype "<<import>>" xyz 637 435 3000 to ref 129538
+end
+simplerelationcanvas 130434 simplerelation_ref 257794
+  from ref 128002 z 2001 stereotype "<<import>>" xyz 630 341 3000 to ref 130306
+end
+relationcanvas 130562 relation_ref 363778 // <generalisation>
+  from ref 128130 z 2006 to ref 128386
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130818 relation_ref 363906 // <generalisation>
+  decenter_begin 745
+  from ref 128386 z 2001 to point 133 154
+  line 130946 z 2001 to ref 130690
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+line 131202 ---+
+  from ref 131074 z 2007 to ref 128002
+relationcanvas 131458 relation_ref 403458 // <dependency>
+  from ref 131330 z 2001 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+simplerelationcanvas 131586 simplerelation_ref 305282
+  from ref 131330 z 2001 stereotype "<<import>>" xyz 149 855 3000 to point 31 853
+  line 131714 z 2001 to point 31 334
+  line 131842 z 2001 to ref 128770
+end
+end

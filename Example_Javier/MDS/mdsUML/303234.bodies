@@ -1,0 +1,21 @@
+class Force
+!!!309762.java!!!	createForce(in s : State) : IForce
+	  return new Force(s);
+!!!309890.java!!!	Force(in s : State)
+      this.s = s;
+!!!310018.java!!!	calcForce() : double
+	//TODO...?
+
+	return 0.0;
+!!!310146.java!!!	evalPotential(in distance : double) : double
+	//TODO...?
+
+	return 0.0;
+!!!310274.java!!!	drawPotential() : Graph
+	//TODO...!
+
+	return null;
+!!!310402.java!!!	drawPairDistributionFunction() : Graph
+	//TODO...!
+
+	return null;
