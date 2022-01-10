@@ -2,6 +2,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+from datetime import datetime
 
 # Problems:
 # centering doesn't always work
@@ -11,7 +12,7 @@ import matplotlib.pyplot as plt
 ###### COORDINATES
 #######################################
 
-def initialize_positions(NUMBER_FCC_UNITS, REDUCED_DENSITY, SEE_ATOMS=False):
+def initialize_positions(NUMBER_FCC_UNITS, REDUCED_DENSITY, SIGMA, SEE_ATOMS=False):
     '''
     This function initializes the atom positions in an FCC lattice
     '''
@@ -71,6 +72,19 @@ def initialize_positions(NUMBER_FCC_UNITS, REDUCED_DENSITY, SEE_ATOMS=False):
         ax.set_zlabel('z')
         plt.show()
 
+    STAMP = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    now = datetime.now()
+    local_now = now.astimezone()
+    local_tz = local_now.tzinfo
+    local_tzname = local_tz.tzname(local_now)
+    space = ' '
+
+    HEADER = f'Initial positions of the atoms in units of SIGMA \
+    \nTime of initialization: {STAMP + space + local_tzname}\
+    \nfirst column: Atom number, rest: x,y,z coordinate'
+    np.savetxt('MD_Simulation/files/positions_ini.dat', positions, header=HEADER,
+                fmt='%4g' + '% 10.4f' * 3)
+
     return positions
 
 #######################################
@@ -83,7 +97,7 @@ def initialize_velocities(positions, REDUCED_TEMPERATURE, SEE_HISTOGRAM=False):
     '''
 
     VARIANCE = REDUCED_TEMPERATURE**(-0.5)
-
+    NUMBER_FCC_UNITS = int((0.25 * len(positions))**(1/3))
     # initialize the numpy arrays:
     # first dim is number of atom, second dim is the cordinate (xyz)
     velocities = np.zeros([4*NUMBER_FCC_UNITS**3, 4])
@@ -103,14 +117,28 @@ def initialize_velocities(positions, REDUCED_TEMPERATURE, SEE_HISTOGRAM=False):
 
     np.save("MD_simulation/files/velocities_ini", velocities)
 
+    STAMP = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    now = datetime.now()
+    local_now = now.astimezone()
+    local_tz = local_now.tzinfo
+    local_tzname = local_tz.tzname(local_now)
+    space = ' '
+
+    HEADER = f'Initial velocities of the atoms in units of ??? \
+    \nTime of initialization: {STAMP + space + local_tzname}\
+    \nfirst column: Atom number, rest: x,y,z component'
+    np.savetxt('MD_Simulation/files/velocities_ini.dat', velocities, header=HEADER,
+                fmt='%4g' + '% 10.4f' * 3)
+
     return velocities
 
-def plot_velocity_hist(velocities, SEE_HISTOGRAM=False):
+def plot_velocity_hist(velocities, NUMBER_HIST_BINS, SEE_HISTOGRAM=False):
     '''
     This function calculates and plots a histogram of the velocitites in each direction
     '''
     
     # calculate total velocity again
+    NUMBER_FCC_UNITS = int((0.25 * len(velocities))**(1/3))
     total_velocity = np.zeros(3)
     for i in range(4 * NUMBER_FCC_UNITS**3):
         total_velocity += velocities[i, 1:]
