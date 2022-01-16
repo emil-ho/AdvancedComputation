@@ -56,7 +56,7 @@ def initialize_neighbor_list(positions, cutoff_distance, savedir=None):
 
     # this block is for the output file
     if savedir != True:
-        with open('savedir/nblist_ini.dat', 'w') as f:
+        with open(savedir + '/nblist_ini.dat', 'w') as f:
             STAMP = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
             now = datetime.now()
             local_now = now.astimezone()
@@ -69,7 +69,7 @@ def initialize_neighbor_list(positions, cutoff_distance, savedir=None):
 
         for i in range(len(nbpoint) - 1):
             nn = nbpoint[i+1] - nbpoint[i]
-            with open('savedir/nblist_ini.dat', 'a') as f:
+            with open(savedir + '/nblist_ini.dat', 'a') as f:
                 f.write(f'Atom number: {int(positions[i,0])}\n')
                 f.write(f'  Position of Atom: {positions[i, 1:]}\n')
                 f.write(f'  Number of neighbors: {nn}\n')

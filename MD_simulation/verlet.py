@@ -2,13 +2,10 @@
 import numpy as np
 from tqdm import tqdm
 
-
 import matplotlib.pyplot as plt
 from fake_inputs import *
 
-positions=np.loadtxt("initial_positions.dat")
 # no idea if we even need this function
-
 def potential_init(sigma, epsilon, r):
     """
     This function calculates a LJ-Potential and the corresponding forces for a given array of radii
@@ -176,4 +173,3 @@ def do_md(x_init, v_init, dt, n_steps):
         pot[i], kin[i] = calc_energies(x[i], v[i])
         
     return x, v, pot, kin
-

@@ -108,7 +108,7 @@ def initialize_positions(number_fcc_units, reduced_density, see_atoms=False, sav
         HEADER = f'Initial positions of the atoms in units of SIGMA \
         \nTime of initialization: {STAMP + space + local_tzname}\
         \nfirst column: Atom number, rest: x,y,z coordinate'
-        np.savetxt('savedir/positions_ini.dat', positions, header=HEADER,
+        np.savetxt(savedir + '/positions_ini.dat', positions, header=HEADER,
                     fmt='%4g' + '% 10.4f' * 3)
 
     return positions
@@ -172,7 +172,7 @@ def initialize_velocities(positions, reduced_temperature, savedir=None):
         HEADER = f'Initial velocities of the atoms in units of ??? \
         \nTime of initialization: {STAMP + space + local_tzname}\
         \nfirst column: Atom number, rest: x,y,z component'
-        np.savetxt('savedir/velocities_ini.dat', velocities, header=HEADER,
+        np.savetxt(savedir + '/velocities_ini.dat', velocities, header=HEADER,
                     fmt='%4g' + '% 10.4f' * 3)
 
     return velocities
