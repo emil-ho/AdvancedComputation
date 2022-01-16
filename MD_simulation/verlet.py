@@ -2,10 +2,13 @@
 import numpy as np
 from tqdm import tqdm
 
+
 import matplotlib.pyplot as plt
 from fake_inputs import *
 
+positions=np.loadtxt("initial_positions.dat")
 # no idea if we even need this function
+
 def potential_init(sigma, epsilon, r):
     """
     This function calculates a LJ-Potential and the corresponding forces for a given array of radii
@@ -30,8 +33,8 @@ def calc_energies(positions, velocities, sigma=SIGMA, epsilon=EPSILON):
         N is the number of Atoms
         positions[:,0] corresponds the index of the atom
         positions[:,1] corresponds to the x coordinate
-        positions[:,1] corresponds to the y coordinate
-        positions[:,1] corresponds to the z coordinate
+        positions[:,2] corresponds to the y coordinate
+        positions[:,3] corresponds to the z coordinate
     velocities: array of shape (N, 4)
         N is the number of Atoms
         velocities[:,0] corresponds the index of the atom
@@ -66,8 +69,8 @@ def calc_forces(positions, sigma=SIGMA, epsilon=EPSILON):
         N is the number of Atoms
         positions[:,0] corresponds the index of the atom
         positions[:,1] corresponds to the x coordinate
-        positions[:,1] corresponds to the y coordinate
-        positions[:,1] corresponds to the z coordinate
+        positions[:,2] corresponds to the y coordinate
+        positions[:,3] corresponds to the z coordinate
     sigma: float
         Parameter of the LJ potential
     epsilon: float
@@ -76,45 +79,51 @@ def calc_forces(positions, sigma=SIGMA, epsilon=EPSILON):
         N is the number of Atoms
         forces[:,0] corresponds the index of the atom
         forces[:,1] corresponds to the x coordinate
-        forces[:,1] corresponds to the y coordinate
-        forces[:,1] corresponds to the z coordinate
+        forces[:,2] corresponds to the y coordinate
+        forces[:,3] corresponds to the z coordinate
     """ 
     N = len(positions)
+    total_forces = np.zeros_like(positions)
+    total_forces[:,0] = positions[:,0]
+    
     for i in range(N):
-        forces = positions  # initialize array
+        forces = np.zeros_like(positions)  # initialize array
+        forces[:,0] = positions[:,0]
         for j in range(N):
             if i != j:  # atoms don't have force on themself
-                r = positions[i, 1:] - positions[j, 1:]
-                forces[:,1] = - 4 * epsilon * (12 * (sigma / r[0])**13 - 6 * (sigma / r[0])**7)
-                forces[:,2] = - 4 * epsilon * (12 * (sigma / r[1])**13 - 6 * (sigma / r[1])**7)
-                forces[:,3] = - 4 * epsilon * (12 * (sigma / r[2])**13 - 6 * (sigma / r[2])**7)
+                vec_r = positions[i, 1:] - positions[j, 1:]
+                mod_r = np.sqrt(vec_r[0]**2+vec_r[1]**2+vec_r[2]**2)
+                mod_force = - 4 * epsilon * (12 * ((sigma**12) / (mod_r)**13) - 6 * ((sigma**6) / (mod_r)**7))
+                vec_force = vec_r / mod_r
+                forces[j, 1:] += mod_force * vec_force
             else:
                 pass
-    return forces
+        total_forces[:,1:] += forces[:,1:]
+    return total_forces
 
 def integrate(pos_cur, pos_prev, dt, forces):
     """
     Integrate the equation of motion using the Verlet algorithm.       
-    x_cur : array of shape (N, 4)
+    pos_cur : array of shape (N, 4)
         current positions
         positions[:,0] corresponds the index of the atom
         positions[:,1] corresponds to the x coordinate
-        positions[:,1] corresponds to the y coordinate
-        positions[:,1] corresponds to the z coordinate
-    x_prev : array of shape (N, 4)
+        positions[:,2] corresponds to the y coordinate
+        positions[:,3] corresponds to the z coordinate
+    pos_prev : array of shape (N, 4)
         previus positions
         positions[:,0] corresponds the index of the atom
         positions[:,1] corresponds to the x coordinate
-        positions[:,1] corresponds to the y coordinate
-        positions[:,1] corresponds to the z coordinate
+        positions[:,2] corresponds to the y coordinate
+        positions[:,3] corresponds to the z coordinate
     dt : float
         time step size
     forces : array of shape (N, 4)
         N is the number of Atoms
         forces[:,0] corresponds the index of the atom
         forces[:,1] corresponds to the x coordinate
-        forces[:,1] corresponds to the y coordinate
-        forces[:,1] corresponds to the z coordinate
+        forces[:,2] corresponds to the y coordinate
+        forces[:,3] corresponds to the z coordinate
     returns: array of shape (N, 4), array of shape (N, 4)
         new positions and velocities
     """
@@ -131,14 +140,14 @@ def do_md(x_init, v_init, dt, n_steps):
         current positions
         x_init[:,0] corresponds the index of the atom
         x_init[:,1] corresponds to the x coordinate
-        x_init[:,1] corresponds to the y coordinate
-        x_init[:,1] corresponds to the z coordinate
+        x_init[:,2] corresponds to the y coordinate
+        x_init[:,3] corresponds to the z coordinate
     v_init: array of shape (N, 4)
         current positions
         v_init[:,0] corresponds the index of the atom
         v_init[:,1] corresponds to the x coordinate
-        v_init[:,1] corresponds to the y coordinate
-        v_init[:,1] corresponds to the z coordinate
+        v_init[:,2] corresponds to the y coordinate
+        v_init[:,3] corresponds to the z coordinate
     returns:
         positions: array of shape (n_steps, N, 4)
         velocities: array of shape (n_steps, N, 4)

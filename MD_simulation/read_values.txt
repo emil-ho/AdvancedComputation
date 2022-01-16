@@ -1,0 +1,15 @@
+fcc=1
+rd=5
+
+rt=11
+sig=71
+
+eps=3
+cop=6
+col=85
+
+ns=36
+
+rs=8
+
+wh=57
