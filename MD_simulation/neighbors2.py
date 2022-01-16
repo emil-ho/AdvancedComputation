@@ -5,7 +5,7 @@ from fake_inputs import *  # just for testing
 
 # positions = np.load('MD_simulation/files/positions_ini.npy')
 
-# status: not working properly
+# status: not working properly? Less neighbors than Javier
 # Problems:
 # periodic boundary condition is not implemented
 
@@ -20,12 +20,22 @@ def calc_distance(coord1, coord2):
     distance = (vec[0]**2 + vec[1]**2 + vec[2]**2)**0.5
     return distance
 
-def initialize_neighbor_list(positions, cutoff_distance, output=True):
+def initialize_neighbor_list(positions, cutoff_distance, savedir=None):
     '''
     This function initializes the neighbor list from a given array of positions
-    positions: np.array with dims (n,4). arr[n,0] is the index of the atom, arr[n,1:] are the xzy coordinates
-    cutoff_distance: float, in units of sigma
-    output: bool, wether a output file of the neighbors should be generated or not
+
+    positions: array of shape (N, 4)
+        N is the number of Atoms
+        positions[:,0] corresponds the index of the atom
+        positions[:,1] corresponds to the x coordinate
+        positions[:,1] corresponds to the y coordinate
+        positions[:,1] corresponds to the z coordinate
+    cutoff_distance: float
+        cutoff distance in units of sigma
+    savedir: string
+        The location of the directory where the files should be saved
+    returns: 1d-array, 1d-array
+        The neighbor list and the neighborpoint, indicating the position of the next atom in the neighborlist
     '''
     natoms = len(positions)
     nblist = []
@@ -45,8 +55,8 @@ def initialize_neighbor_list(positions, cutoff_distance, output=True):
                 counter += 1
 
     # this block is for the output file
-    if output == True:
-        with open('MD_simulation/files/nblist_ini.dat', 'w') as f:
+    if savedir != True:
+        with open('savedir/nblist_ini.dat', 'w') as f:
             STAMP = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
             now = datetime.now()
             local_now = now.astimezone()
@@ -59,7 +69,7 @@ def initialize_neighbor_list(positions, cutoff_distance, output=True):
 
         for i in range(len(nbpoint) - 1):
             nn = nbpoint[i+1] - nbpoint[i]
-            with open('MD_simulation/files/nblist_ini.dat', 'a') as f:
+            with open('savedir/nblist_ini.dat', 'a') as f:
                 f.write(f'Atom number: {int(positions[i,0])}\n')
                 f.write(f'  Position of Atom: {positions[i, 1:]}\n')
                 f.write(f'  Number of neighbors: {nn}\n')
@@ -77,12 +87,3 @@ def initialize_neighbor_list(positions, cutoff_distance, output=True):
         # without double counting anyways
 
     return nblist, nbpoint
-
-
-
-POSITIONS = np.loadtxt('Example_Javier/initial_positions.dat')
-
-NBlist, NBpoint = initialize_neighbor_list(POSITIONS, 2.7)
-
-# print(NBpoint)
-print(POSITIONS)
