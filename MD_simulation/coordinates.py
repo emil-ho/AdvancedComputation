@@ -7,6 +7,7 @@ from datetime import datetime
 # Problems:
 # centering doesn't always work
 # when changing units to units where sigma=1, spaces between atoms seem really big
+# number of bins makes problems, supposedly isn't an int?
 
 #######################################
 ###### COORDINATES
@@ -14,15 +15,33 @@ from datetime import datetime
 
 def initialize_positions(NUMBER_FCC_UNITS, REDUCED_DENSITY, SIGMA, SEE_ATOMS=False):
     '''
-    This function initializes the atom positions in an FCC lattice
+    This function initializes the atom positions in an FCC lattice.
+
+    NUMBER_FCC_UNITS: int
+        Number of unit cells in each direction
+    REDUCED_DENSITY: float
+        Density in reduced units
+    SIGMA: float
+        Parameter of the LJ-potential
+    SEE_ATOMS: BOOL
+        If True, the atom configuration will be plotted
+    returns: array of shape (N, 4)
+        N is the number of Atoms
+        positions[:,0] corresponds the index of the atom
+        positions[:,1] corresponds to the x coordinate
+        positions[:,1] corresponds to the y coordinate
+        positions[:,1] corresponds to the z coordinate
     '''
+    # calculate number of atoms
+    NATOMS = 4*NUMBER_FCC_UNITS**3
+
     # calculate the lattice constant (for an fcc lattice)
     A = (4 / REDUCED_DENSITY) ** (1/3)
 
     # initialize the numpy arrays:
     # first dim is number of atom, second dim is the cordinate (xyz)
-    positions = np.zeros([4*NUMBER_FCC_UNITS**3, 4])
-    for i in range(4*NUMBER_FCC_UNITS**3):
+    positions = np.zeros([NATOMS, 4])
+    for i in range(NATOMS):
         positions[i,0] = i
 
     # initialize the positions of the 4 atoms in the basis (atom 0 is at (0,0,0))
@@ -48,14 +67,14 @@ def initialize_positions(NUMBER_FCC_UNITS, REDUCED_DENSITY, SIGMA, SEE_ATOMS=Fal
     center = center_first + 0.5 * center_last
 
     # shift everything so the center is on (0,0,0)
-    for i in range(4*NUMBER_FCC_UNITS**3):
+    for i in range(NATOMS):
         positions[i,1:] = positions[i,1:] - center
 
     # switch to units where sigma=1
     positions[:,1:] = positions[:,1:] * NUMBER_FCC_UNITS * A / SIGMA
     # no idea if that was right, space between atoms seems too big ?????
 
-    np.save("MD_Simulation/files/positions_ini", positions)
+    # np.save("MD_Simulation/files/positions_ini", positions)
 
     if SEE_ATOMS == True:
         fig = plt.figure()
@@ -82,8 +101,8 @@ def initialize_positions(NUMBER_FCC_UNITS, REDUCED_DENSITY, SIGMA, SEE_ATOMS=Fal
     HEADER = f'Initial positions of the atoms in units of SIGMA \
     \nTime of initialization: {STAMP + space + local_tzname}\
     \nfirst column: Atom number, rest: x,y,z coordinate'
-    np.savetxt('MD_Simulation/files/positions_ini.dat', positions, header=HEADER,
-                fmt='%4g' + '% 10.4f' * 3)
+#    np.savetxt('MD_Simulation/files/positions_ini.dat', positions, header=HEADER,
+#                fmt='%4g' + '% 10.4f' * 3)
 
     return positions
 
@@ -93,18 +112,36 @@ def initialize_positions(NUMBER_FCC_UNITS, REDUCED_DENSITY, SIGMA, SEE_ATOMS=Fal
 
 def initialize_velocities(positions, REDUCED_TEMPERATURE, SEE_HISTOGRAM=False):
     '''
-    This function initialize Boltzmann distributed velocities for a given array of atoms
+    This function initialize Boltzmann distributed velocities for a given array of atoms.
+
+    positions: array of shape (N, 4)
+        N is the number of Atoms
+        positions[:,0] corresponds the index of the atom
+        positions[:,1] corresponds to the x coordinate
+        positions[:,1] corresponds to the y coordinate
+        positions[:,1] corresponds to the z coordinate
+    REDUCED_TEMPERATURE: float
+        Temperature of the system in reduced units
+    SEE_HISTOGRAM: Bool
+        If True, the histogram will be plotted and saved
+    returns: array of shape (N, 4)
+        N is the number of Atoms
+        velocities[:,0] corresponds the index of the atom
+        velocities[:,1] corresponds to the x coordinate
+        velocities[:,2] corresponds to the y coordinate
+        velocities[:,3] corresponds to the z coordinate
     '''
 
     VARIANCE = REDUCED_TEMPERATURE**(-0.5)
     NUMBER_FCC_UNITS = int((0.25 * len(positions))**(1/3))
+    NATOMS = len(positions)
     # initialize the numpy arrays:
     # first dim is number of atom, second dim is the cordinate (xyz)
-    velocities = np.zeros([4*NUMBER_FCC_UNITS**3, 4])
-    for i in range(4*NUMBER_FCC_UNITS**3):
+    velocities = np.zeros([NATOMS, 4])
+    for i in range(NATOMS):
         velocities[i,0] = int(i)
 
-    velocities[:,1:] = VARIANCE**2 * np.random.randn(4*NUMBER_FCC_UNITS**3, 3)
+    velocities[:,1:] = VARIANCE**2 * np.random.randn(NATOMS, 3)
 
     total_velocity = np.zeros(3)
     for i in range(4 * NUMBER_FCC_UNITS**3):
@@ -115,7 +152,7 @@ def initialize_velocities(positions, REDUCED_TEMPERATURE, SEE_HISTOGRAM=False):
     for i in range(4 * NUMBER_FCC_UNITS**3):
         velocities[i,1:] -= total_velocity
 
-    np.save("MD_simulation/files/velocities_ini", velocities)
+ #   np.save("MD_simulation/files/velocities_ini", velocities)
 
     STAMP = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
     now = datetime.now()
@@ -127,29 +164,42 @@ def initialize_velocities(positions, REDUCED_TEMPERATURE, SEE_HISTOGRAM=False):
     HEADER = f'Initial velocities of the atoms in units of ??? \
     \nTime of initialization: {STAMP + space + local_tzname}\
     \nfirst column: Atom number, rest: x,y,z component'
-    np.savetxt('MD_Simulation/files/velocities_ini.dat', velocities, header=HEADER,
-                fmt='%4g' + '% 10.4f' * 3)
+#    np.savetxt('MD_Simulation/files/velocities_ini.dat', velocities, header=HEADER,
+#                fmt='%4g' + '% 10.4f' * 3)
 
     return velocities
 
 def plot_velocity_hist(velocities, NUMBER_HIST_BINS, SEE_HISTOGRAM=False):
     '''
-    This function calculates and plots a histogram of the velocitites in each direction
+    This function calculates and plots a histogram of the velocitites in each direction.
+
+    velocities: array of shape (N, 4)
+        N is the number of Atoms.
+        velocities[:,0] corresponds the index of the atom
+        velocities[:,1] corresponds to the x coordinate
+        velocities[:,2] corresponds to the y coordinate
+        velocities[:,3] corresponds to the z coordinate
+    NUMBER_HIST_BINS: int
+        The number of bins the histogram should have
+    SEE_HISTOGRAM: Bool
+        if True, the histogram is plotted
+    returns: bunch of stuff
     '''
     
-    # calculate total velocity again
+    # calculating the total velocity (to include in the plot)
     NUMBER_FCC_UNITS = int((0.25 * len(velocities))**(1/3))
     total_velocity = np.zeros(3)
     for i in range(4 * NUMBER_FCC_UNITS**3):
         total_velocity += velocities[i, 1:]
     total_velocity = total_velocity / (4 * NUMBER_FCC_UNITS**3)
-    print(f"total_velocity = {total_velocity}")
+#     print(f"total_velocity = {total_velocity}")
 
-    # making the histogram
+    # computing the histogram
     vel_hist_x, bin_edges_x = np.histogram(velocities[:,1], NUMBER_HIST_BINS)
     vel_hist_y, bin_edges_y = np.histogram(velocities[:,2], NUMBER_HIST_BINS)
     vel_hist_z, bin_edges_z = np.histogram(velocities[:,3], NUMBER_HIST_BINS)
 
+    # Plotting of the histogram
     if SEE_HISTOGRAM == True:
 
         max_counts = np.max(np.concatenate((vel_hist_x, vel_hist_y, vel_hist_z)))

@@ -23,14 +23,15 @@ def initialize_neighbor_list(positions, cutoff_distance, cutoff_list, box_length
     '''
     This function initializes the neighbor list from a given array of positions
     '''
+    NATOMS = len(positions)
     point, list = [], []
     NLIST = 0  # initialize counter
 
-    for i in range(len(positions)):  # loop over all atoms in supercell
-        point[i] = NLIST + 1
-        for j in range(i+1, len(positions)):  # loop over all remaining atoms in sc
+    for i in range(NATOMS):  # loop over all atoms in supercell
+        point[i] = NLIST + 0
+        for j in range(i+1, NATOMS):  # loop over all remaining atoms in sc
             rel_pos = positions[j, 1:] - positions[i, 1:]
-#            RXIJ = ANINT(RCIJ/BOXL) * BOXL  # float(round()) = ANINT()
+#            RXIJ = ANINT(RCIJ/BOXL) * BOXL  # float(round()) = ANINT() from FORTRAN
             dist2 = rel_pos[0]**2 + rel_pos[1]**2 + rel_pos[2]**2
             if dist2 < cutoff_list**2:
                 NLIST += 1
@@ -45,7 +46,7 @@ def update_neighbor_list(positions, cutoff_distance, cutoff_list, neighbors):
     '''
     return neighbors
 
-print(initialize_neighbor_list(positions, 2.5, 2.7, ))
+print(initialize_neighbor_list(positions, 2.5, 2.7, 4))
 
 
 
