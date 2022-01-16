@@ -11,9 +11,6 @@ from tkinter import filedialog
 from tkinter import simpledialog
 from tkinter import ttk
 
-default_values=[1,]*10
-
-
 def return_values():
     file=open('read_values.txt',"r+")
     for linea in file:
@@ -98,8 +95,6 @@ def error3():
     button_close.grid(row=4,column=1)
     root3.mainloop()
     
-
-
 def button_1():
     
     ######################################################################
@@ -545,16 +540,6 @@ def button_1():
     
     root1.mainloop()
 
-
-
-
-
-
-
-
-
-
-
 def button_2():
 
     root.destroy()
@@ -591,23 +576,10 @@ def button_2():
             wh = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
             
     write_values(fcc1,rd,rt,sig,eps,cop,col,ns,rs,wh)
-
-        
-    
-    
-
-
-
-    
+   
 def button_3():
     root.destroy()
-
-
-
-
-    
-
-    
+  
 def mainbutton():
     global root
     root=tkinter.Tk()
@@ -623,24 +595,6 @@ def mainbutton():
 
 
     root.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 def defaultvalues():
     root.destroy()  
