@@ -25,12 +25,15 @@ def initialize_positions(number_fcc_units, reduced_density, see_atoms=False, sav
         If True, the atom configuration will be plotted
     savedir: string
         The location of the directory where the files should be saved
-    returns: array of shape (N, 4)
+    returns: array of shape (N, 4), array of shape (4,3)
         N is the number of Atoms
         positions[:,0] corresponds the index of the atom
         positions[:,1] corresponds to the x coordinate
         positions[:,1] corresponds to the y coordinate
         positions[:,1] corresponds to the z coordinate
+
+        First row is starting point of the box
+        Other rows are xyz coord of one basis vector of the box
     '''
     # calculate number of atoms
     NATOMS = 4 * number_fcc_units**3
@@ -73,6 +76,13 @@ def initialize_positions(number_fcc_units, reduced_density, see_atoms=False, sav
     for i in range(NATOMS):
         positions[i,1:] = positions[i,1:] - 0.5 * number_fcc_units * A * np.ones(3)
 
+    # compute coordinates of the simulation box
+    boxl = number_fcc_units * A
+    box = np.array([positions[0,1:],
+                    positions[0,1:] + boxl * np.array([1,0,0]),
+                    positions[0,1:] + boxl * np.array([0,1,0]),
+                    positions[0,1:] + boxl * np.array([0,0,1])])
+
     if see_atoms == True:
         fig = plt.figure()
         ax = fig.add_subplot(projection='3d')
@@ -111,7 +121,7 @@ def initialize_positions(number_fcc_units, reduced_density, see_atoms=False, sav
         np.savetxt(savedir + '/positions_ini.dat', positions, header=HEADER,
                     fmt='%4g' + '% 10.4f' * 3)
 
-    return positions
+    return positions, box, boxl
 
 #######################################
 ###### VELOCITIES

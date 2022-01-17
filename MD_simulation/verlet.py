@@ -110,7 +110,7 @@ def do_md(x_init, v_init, dt, n_steps):
     return x, v, pot, kin, forces
 
 
-def do_md_pdb(x_init, v_init, dt, n_steps, box, boxl):
+def do_md_pbc(x_init, v_init, dt, n_steps, box, boxl):
     # Initialize energy arrays
     pot = np.zeros(n_steps)
     kin = np.zeros(n_steps)
@@ -124,21 +124,34 @@ def do_md_pdb(x_init, v_init, dt, n_steps, box, boxl):
     forces[0] = calc_forces(x[0])
     pot[0], kin[0] = calc_energies(x[0], v[0])
 
-    ptosb = np.zeros((n_steps, 1))
+    box0 = box[0]  # a bottom corner of the box
+    box00 = box[0] + boxl * np.ones(3)  # the corner furthest away from the former
+    ptosb = np.zeros((n_steps, 1))  # array to count particles that went "outside"
 
     for i in tqdm(range(1, n_steps)):
         # calculate new positions
         x[i,:,1:] = x[i-1,:,1:] + v[i-1,:,1:] * dt + 0.5 * dt**2 * forces[i-1,:,1:]
+        
         # check if atoms 'escaped'
         for j in range(len(x_init)):
-            if (x[i,j,1:] > box[0]).all() and (x[i,j,1:] < box[0] + boxl * np.ones(3)).all():
+            if (x[i,j,1:] > box0).all() and (x[i,j,1:] < box00).all():
                 pass
             else:
                 ptosb[i] += 1
-            
-
+                # find the value that's too big
+                for k in range(3):
+                    if x[i,j,1+k] < box0[k]:
+                        x[i,j,1+k] += boxl
+                    elif x[i,j,1+k] > box00[k]:
+                        x[i,j,1+k] -= boxl
+                    else:
+                        pass
+        
+        # calculate new forces and velocities
         forces[i] = calc_forces(x[i])
         v[i,:,1:] = v[i-1,:,1:] + 0.5 * dt * (forces[i,:,1:] + forces[i-1,:,1:])
         pot[i], kin[i] = calc_energies(x[i], v[i])
         
     return x, v, pot, kin, forces, ptosb
+
+
