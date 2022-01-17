@@ -19,3 +19,5 @@ CUTOFF_LIST = 2.7  # cutoff distance
 
 TIMESTEP = 1  # duration of one timestep in ns
 NUMBER_OF_STEPS = 20  # Number of simulation steps
+
+SAVEDIR = None
