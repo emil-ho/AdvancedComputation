@@ -10,6 +10,7 @@ from fake_inputs import *  # just for testing
 # periodic boundary condition is not implemented
 
 # this function might be unnecessary
+import coordinates
 def calc_distance(coord1, coord2):
     '''
     calculates distance between two atoms
@@ -17,7 +18,7 @@ def calc_distance(coord1, coord2):
     coord2: array of shape (1,4)
     '''
     vec = coord1[1:] - coord2[1:]
-    distance = (vec[0]**2 + vec[1]**2 + vec[2]**2)**0.5
+    distance = np.sqrt((vec[0]**2 + vec[1]**2 + vec[2]**2))
     return distance
 
 def initialize_neighbor_list(positions, cutoff_distance, output=True):
@@ -46,7 +47,7 @@ def initialize_neighbor_list(positions, cutoff_distance, output=True):
 
     # this block is for the output file
     if output == True:
-        with open('MD_simulation/files/nblist_ini.dat', 'w') as f:
+        with open('files/nblist_ini.txt', 'w') as f:
             STAMP = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
             now = datetime.now()
             local_now = now.astimezone()
@@ -56,10 +57,11 @@ def initialize_neighbor_list(positions, cutoff_distance, output=True):
             HEADER = f'Neighbors of the atoms after initialization \
             \nTime of initialization: {STAMP + space + local_tzname}\n\n'
             f.write(HEADER)
+            f.close()
 
         for i in range(len(nbpoint) - 1):
             nn = nbpoint[i+1] - nbpoint[i]
-            with open('MD_simulation/files/nblist_ini.dat', 'a') as f:
+            with open('files/nblist_ini.txt', 'a') as f:
                 f.write(f'Atom number: {int(positions[i,0])}\n')
                 f.write(f'  Position of Atom: {positions[i, 1:]}\n')
                 f.write(f'  Number of neighbors: {nn}\n')
@@ -72,7 +74,7 @@ def initialize_neighbor_list(positions, cutoff_distance, output=True):
                     f.write(f'{format(positions[nblist[j]][3], " .4f")}  ')
                     f.write(f'{format(nblist_dist[j], " .2f")}\n')
                 f.write('\n')
-        
+                f.close()
         # the loop ignores the last atom, but it can't have any neighbors
         # without double counting anyways
 
@@ -80,9 +82,12 @@ def initialize_neighbor_list(positions, cutoff_distance, output=True):
 
 
 
-POSITIONS = np.loadtxt('Example_Javier/initial_positions.dat')
+POSITIONS = np.loadtxt('files/initial_positions.dat')
+positions=coordinates.initialize_positions(3,0.8442,0.341)
 
-NBlist, NBpoint = initialize_neighbor_list(POSITIONS, 2.7)
+NBlist, NBpoint = initialize_neighbor_list(positions, 2.7)
 
 # print(NBpoint)
-print(POSITIONS)
+
+#print(POSITIONS)
+#print(initialize_neighbor_list(POSITIONS, 2.7))
