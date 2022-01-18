@@ -16,10 +16,16 @@ global sigma1
 sigma1="nm"
 global epsilon1 
 epsilon1="K"
+global directory
+directory="a"
 
 
-
-
+def delete_values():
+    """This function is only for debuging an error """
+    file=open('files/read_values.txt',"r+")
+    file.seek(0)
+    file.truncate()
+    
 def return_values():
     """This function returns the values given in the GUI
     
@@ -70,8 +76,9 @@ def return_values():
         if "wh" in linea:
             numbers = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
             wh=float(numbers[0])
+        
             
-    return(fcc,rd,rt,sig,eps,cop,col,ns,rs,wh,sigma1,epsilon1)
+    return(fcc,rd,rt,sig,eps,cop,col,ns,rs,wh,sigma1,epsilon1,directory)
 
 def write_values(fcc1,rd,rt,sig,eps,cop,col,ns,rs,wh):
       
@@ -161,7 +168,7 @@ def button_1():
         global sigma1
         sigma1='A'
 
-        armstrongs= tkinter.Label(root1,text=' Armstrongs (A) ')
+        armstrongs= tkinter.Label(root1,text='  Angstrongs (A) ')
         armstrongs.grid(row=3,column=2)
 
         
@@ -538,7 +545,7 @@ def button_1():
     
     button_5=ttk.Button(root1,text="nanometers (nm)",command=button_5)
     button_5.grid(row=3,column=3)
-    button_6=ttk.Button(root1,text="Armostrongs (A)",command=button_6)
+    button_6=ttk.Button(root1,text=" Angstrongs  (A)",command=button_6)
     button_6.grid(row=3,column=4)
 
     
@@ -610,73 +617,134 @@ def button_1():
     #BotOn enter
     
     button2=ttk.Button(root1,text="Enter",command=button_4)
-    button2.grid(row=11,column=2)
+    button2.grid(row=12,column=2)
 
 
     
     #Use default values
     
     button_default=ttk.Button(root1,text="Use default values",command=button_9)
-    button_default.grid(row=11,column=4)
+    button_default.grid(row=12,column=4)
     
     #Quit
     
     button_quit=ttk.Button(root1,text="Quit",command=button_10)
-    button_quit.grid(row=11,column=0)
+    button_quit.grid(row=12,column=0)
+    def button_folder():
+        root2=tkinter.Tk()
+        global directory
+        directory=tkinter.filedialog.askdirectory()
+        directory=directory
+        root2.destroy()
+        root2.mainloop()
+        
+    button_folder=ttk.Button(root1,text="Choose a folder to store the data",command=button_folder)
+    button_folder.grid(row=11,column=2)
     
     root1.mainloop()
 
 def button_2():
 
-    root.destroy()
-    archivo=tkinter.filedialog.askopenfile(mode='r')
-    global sigma1
-    global epsilon1
-    for linea in archivo:
-        if "NumberFCCUnits" in linea:
-            fcc1 = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+        
+    def mybutton1():
+        root2=tkinter.Tk()
+        global archivo
+        
+        archivo=tkinter.filedialog.askopenfile(mode='r')
 
-        if "ReducedDensity" in linea:
-            rd = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
 
-        if "ReducedTemperature" in linea:
-            rt = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+        root2.destroy()
+        root2.mainloop()
+        
+    def mybutton2():
+        root2=tkinter.Tk()
+        global directory
+        directory=tkinter.filedialog.askdirectory()
+        root2.destroy()
+        root2.mainloop()
+        
+    def mybutton3():
+        
+        global sigma1
+        global epsilon1
 
-        if "Sigma" in linea:
-            if "nm" in linea:
 
-                sigma1="nm"
-            if "A" in linea:
+        for linea in archivo:
+            if "NumberFCCUnits" in linea:
+                fcc1 = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
 
-                sigma1="A"
-            sig = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+            if "ReducedDensity" in linea:
+                rd = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+                
+            if "ReducedTemperature" in linea:
+                rt = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
 
-        if "Epsilon" in linea:
-            if "K" in linea:
+            if "Sigma" in linea:
+                if "nm" in linea:
 
-                epsilon1="K"
-            if "C" in linea:
+                    sigma1="nm"
+                if "A" in linea:
 
-                epsilon1="C"
-            eps = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
-
-        if "CutoffPotential" in linea:
-            cop = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+                    sigma1="A"
+                sig = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
             
-        if "CutoffList" in linea:
-            col = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+            if "Epsilon" in linea:
+                if "K" in linea:
 
-        if "NumberOfSteps" in linea:
-            ns = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+                    epsilon1="K"
+                if "C" in linea:
 
-        if "ReducedTimeStep" in linea:
-            rs = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+                    epsilon1="C"
+                eps = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
 
-        if "WidthBinPairDistributionFunction" in linea:
-            wh = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+            if "CutoffPotential" in linea:
+                cop = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
             
-    write_values(fcc1,rd,rt,sig,eps,cop,col,ns,rs,wh)
-   
+            if "CutoffList" in linea:
+                col = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+
+            if "NumberOfSteps" in linea:
+                ns = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+
+            if "ReducedTimeStep" in linea:
+                rs = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+                    
+            if "WidthBinPairDistributionFunction" in linea:
+                wh = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+        write_values(fcc1,rd,rt,sig,eps,cop,col,ns,rs,wh)
+        archivo.close()
+
+        rooty.destroy()
+    
+    def qit():
+        rooty.destroy()
+        sys.exit()
+        
+
+    root.destroy()   
+    global rooty
+    rooty=tkinter.Tk()
+    rooty.title('SELECT AN OPTION')
+    mybutton1 = tkinter.Button(rooty, text="Choose your text file", padx=60,pady=30,command=mybutton1)
+    mybutton1.grid(row=0,column=1)
+    mybutton2 = tkinter.Button(rooty, text="Choose a folder to store the data", padx=30,pady=30,command=mybutton2)
+    mybutton2.grid(row=1,column=1)
+    
+    #Enter
+    
+    mybutton3=ttk.Button(rooty,text="Enter",command=mybutton3)
+    mybutton3.grid(row=2,column=1)
+
+
+    
+    #Quit
+    
+    button_quit=ttk.Button(rooty,text="Quit",command=qit)
+    button_quit.grid(row=3,column=1)
+
+    
+     
+    
 def button_3():
     root.destroy()
     sys.exit()
