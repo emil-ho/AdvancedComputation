@@ -1,28 +1,34 @@
 'This module executes a simulation. User input is skipped for testing purposes'
-# from MD_simulation.animation import POSITIONS
-from coordinates import *
-from neighbors2 import *
-from verlet import *
-from verlet_slow import *
-from fake_inputs import *
+import sys
 import os
+import numpy as np
+import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
+from tqdm import tqdm
 
-SAVEDIR = os.getcwd() + '/MD_simulation/files'
+from src_coordinates import *
+from src_neighbors import *
+from src_verlet import *
+from src_verlet_slow import *
+from expl_fake_inputs import *
+
+
+SAVEDIR = os.getcwd() + '/MD_simulation/outputfiles'
 NUMBER_FCC_UNITS = 1
 
 positions_ini, BOX, BOXL = initialize_positions(NUMBER_FCC_UNITS, REDUCED_DENSITY, see_atoms=False, savedir=SAVEDIR)
 velocities_ini = initialize_velocities(positions_ini, reduced_temperature=REDUCED_TEMPERATURE, savedir=SAVEDIR)
+nblist, nbpoint = initialize_neighbor_list(positions_ini, CUTOFF_DISTANCE, savedir=SAVEDIR)
 # plot_velocity_hist(velocities_ini, False)
 
 TIMESTEP = 0.001
-N_STEPS = 100
+N_STEPS = 1000
 
-res = do_md_pbc(positions_ini, velocities_ini, dt=TIMESTEP, n_steps=N_STEPS, box=BOX, boxl=BOXL)
+res = do_md_nb_pbc(positions_ini, velocities_ini, TIMESTEP, N_STEPS, nblist, nbpoint, BOX, BOXL, SIGMA, EPSILON)
 
 x_traj, v_traj, pot, kin, forc, ptosb = res
 
-
+'''
 # plot trajectory
 for a in range(len(positions_ini)):
     plt.plot(x_traj[0, a, 1], x_traj[0, a, 2], "x")
@@ -44,5 +50,4 @@ plt.legend()
 plt.xlabel("step")
 plt.ylabel("Number of particles")
 #plt.show()
-
-print(x_traj)
+'''

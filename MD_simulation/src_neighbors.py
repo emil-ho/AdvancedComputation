@@ -1,7 +1,7 @@
-# this file contains the neighborlist initialization and update method
+'This file contains the neighborlist initialization and update method'
 import numpy as np
 from datetime import datetime
-from fake_inputs import *  # just for testing
+from expl_fake_inputs import *  # just for testing
 
 # positions = np.load('MD_simulation/files/positions_ini.npy')
 
@@ -19,6 +19,7 @@ def calc_distance(coord1, coord2):
     vec = coord1[1:] - coord2[1:]
     distance = (vec[0]**2 + vec[1]**2 + vec[2]**2)**0.5
     return distance
+
 
 def initialize_neighbor_list(positions, cutoff_distance, savedir=None):
     '''

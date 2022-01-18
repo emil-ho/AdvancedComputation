@@ -1,8 +1,9 @@
 '''This file contains the verlet algorithm and what is needed for it'''
 import numpy as np
 from tqdm import tqdm
-from neighbors2 import get_nb_pos, initialize_neighbor_list
-from fake_inputs import *
+
+from src_neighbors import *
+from src_forces import *
 
 # vectorized energy calculation
 def calc_energies(positions, velocities, sigma=SIGMA, epsilon=EPSILON):
@@ -42,63 +43,7 @@ def calc_energies(positions, velocities, sigma=SIGMA, epsilon=EPSILON):
     return Epot, Ekin
 
 
-# vectorized force calculation
-def calc_forces(positions, sigma=SIGMA, epsilon=EPSILON):
-    pos = np.copy(positions[:,1:])
-    N = len(pos)
-    forces = np.zeros_like(pos)
-
-    for i in range(N):
-        # Increase dimension of r to allow vector operations
-        r_inv = 1 / np.linalg.norm(pos[i] - pos[i + 1:], axis=1)[:, np.newaxis]
-        r_norm = (pos[i] - pos[i + 1:]) * r_inv
-
-        # multiply vectors with scalar force
-        r6_inv = r_inv**6
-        # Lennard-Jones force
-        force = 24 * epsilon * sigma**6 * r_inv * r6_inv * (2 * sigma**6 * r6_inv - 1) * r_norm
-        forces[i] += np.sum(force, axis=0)
-        forces[i + 1:] -= force
-
-    total_forces = np.copy(positions)
-    total_forces[:,1:] = forces
-
-    return total_forces
-
-
-def calc_red_forces(pos1, positions, sigma=SIGMA, epsilon=EPSILON):
-    total_forces = np.zeros((len(positions)+1,4))
-    total_forces[0] = pos1
-    total_forces[1:] = positions
-    total_forces[:,1:] *= 0
-
-    for j in range(len(positions)):
-        vec_r = pos1[1:] - positions[j, 1:]  # relative position
-        mod_r = np.sqrt(vec_r[0]**2+vec_r[1]**2+vec_r[2]**2)  # distance
-        mod_force = - 4 * epsilon * (12 * ((sigma**12) / (mod_r)**13) - 6 * ((sigma**6) / (mod_r)**7))  # mod of the force
-        vec_force = mod_force * vec_r / mod_r  # force from atom pos1 on atom j
-        total_forces[1+j,1:] += vec_force  # add this force to the total force arr
-        vec_force_rev = - vec_force # force from atom j on atom pos1
-        total_forces[0,1:] += vec_force_rev  # add this force to the total force arr
-    return total_forces
-
-
-def calc_forces_nb(positions, nblist, nbpoint):
-    total_force = np.zeros_like(positions)
-
-    for j in range(len(positions)-1):
-        nbbs = get_nb_pos(positions, nblist, nbpoint, j)
-        forces = calc_red_forces(positions[j], nbbs)
-
-        total_force[j] += forces[0]
-        kk = 1
-        for k in nbbs[:,0]:
-            total_force[int(k),1:] += forces[kk,1:]
-            kk += 1
-    
-    return total_force
-
-# using only vectorized calculations
+# using only vectorized calculations, no pbc or neighbor list
 def do_md(x_init, v_init, dt, n_steps):
     '''
     execute a md simulation
@@ -143,6 +88,7 @@ def do_md(x_init, v_init, dt, n_steps):
     return x, v, pot, kin, forces
 
 
+# using only vectorized calculations and pbc, no neighbor list
 def do_md_pbc(x_init, v_init, dt, n_steps, box, boxl):
     # Initialize energy arrays
     pot = np.zeros(n_steps)
@@ -187,7 +133,9 @@ def do_md_pbc(x_init, v_init, dt, n_steps, box, boxl):
         
     return x, v, pot, kin, forces, ptosb
 
-def do_md_nb(x_init, v_init, dt, n_steps, nblist, nbpoint):
+
+# using partly vectorized calculations and neighbor list, no pbc
+def do_md_nb(x_init, v_init, dt, n_steps, nblist, nbpoint, sigma, epsilon):
     '''
     execute a md simulation
 
@@ -219,15 +167,12 @@ def do_md_nb(x_init, v_init, dt, n_steps, nblist, nbpoint):
     forces = np.zeros_like(x)
 
     x[0], v[0] = x_init, v_init
-    forces[0] = calc_forces(x[0])
-    pot[0], kin[0] = calc_energies(x[0], v[0])
+    forces[0] = calc_forces(x[0], sigma, epsilon)
+    pot[0], kin[0] = calc_energies(x[0], v[0], sigma, epsilon)
 
     for i in tqdm(range(1, n_steps)):
         # calc new positions
         x[i,:,1:] = x[i-1,:,1:] + v[i-1,:,1:] * dt + 0.5 * dt**2 * forces[i-1,:,1:]
-        
-        # check and apply PBC
-
 
         # check if new nblist has to be computed
         vec = x[i,:,1:] - x[i-1,:,1:]
@@ -237,18 +182,19 @@ def do_md_nb(x_init, v_init, dt, n_steps, nblist, nbpoint):
             nblist, nbpoint = initialize_neighbor_list(x[i], CUTOFF_DISTANCE)
         
         # calculate forces only in between neighbors
-        forces[i] = calc_forces_nb(x[i], nblist, nbpoint)
+        forces[i] = calc_forces_nb(x[i], nblist, nbpoint, sigma, epsilon)
 
         # calculate new velocities
         v[i,:,1:] = v[i-1,:,1:] + 0.5 * dt * (forces[i,:,1:] + forces[i-1,:,1:])
         
         # calculate energies
-        pot[i], kin[i] = calc_energies(x[i], v[i])
+        pot[i], kin[i] = calc_energies(x[i], v[i], sigma, epsilon)
         
     return x, v, pot, kin, forces
 
 
-def do_md_nb_pbc(x_init, v_init, dt, n_steps, nblist, nbpoint, box, boxl):
+# using partly vectorized calculations and neighbor list and pbc
+def do_md_nb_pbc(x_init, v_init, dt, n_steps, nblist, nbpoint, box, boxl, sigma, epsilon):
     '''
     execute a md simulation
 
@@ -280,8 +226,8 @@ def do_md_nb_pbc(x_init, v_init, dt, n_steps, nblist, nbpoint, box, boxl):
     forces = np.zeros_like(x)
 
     x[0], v[0] = x_init, v_init
-    forces[0] = calc_forces(x[0])
-    pot[0], kin[0] = calc_energies(x[0], v[0])
+    forces[0] = calc_forces(x[0], sigma, epsilon)
+    pot[0], kin[0] = calc_energies(x[0], v[0], sigma, epsilon)
 
     box0 = box[0]  # a bottom corner of the box
     box00 = box[0] + boxl * np.ones(3)  # the corner furthest away from the former
@@ -314,12 +260,12 @@ def do_md_nb_pbc(x_init, v_init, dt, n_steps, nblist, nbpoint, box, boxl):
             nblist, nbpoint = initialize_neighbor_list(x[i], CUTOFF_DISTANCE)
         
         # calculate forces only in between neighbors
-        forces[i] = calc_forces_nb(x[i], nblist, nbpoint)
+        forces[i] = calc_forces_nb(x[i], nblist, nbpoint, sigma, epsilon)
 
         # calculate new velocities
         v[i,:,1:] = v[i-1,:,1:] + 0.5 * dt * (forces[i,:,1:] + forces[i-1,:,1:])
         
         # calculate energies
-        pot[i], kin[i] = calc_energies(x[i], v[i])
+        pot[i], kin[i] = calc_energies(x[i], v[i], sigma, epsilon)
         
     return x, v, pot, kin, forces, ptosb

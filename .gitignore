@@ -1,11 +1,5 @@
 .vscode/settings.json
 .vscode/settings.json
-Example_Javier/MDS/.DS_Store
-Example_Javier/.DS_Store
 .gitignore
-MD_simulation/__pycache__/coordinates.cpython-39.pyc
-MD_simulation/__pycache__/fake_inputs.cpython-39.pyc
-MD_simulation/__pycache__/neighbors2.cpython-39.pyc
-MD_simulation/__pycache__/neighbours.cpython-39.pyc
-MD_simulation/__pycache__/verlet.cpython-39.pyc
+.pyc
 .DS_Store

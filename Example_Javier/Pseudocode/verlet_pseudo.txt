@@ -29,3 +29,16 @@ Pseudocode:
         apply the PBC
         compute the interatomic distance r
         check if r is smaller than r_c
+
+
+
+- for i in range(n_timesteps):
+    compute positions[i]
+    - check for pbc (and apply)
+    - check for max movement:
+        - if greater than XX: compute new neighborlist
+    - for j in range(n_atoms):
+        - compute forces for neighbors
+        - add them to all_forces[i]
+    - compute velocities[i]
+    - compute energies[i]

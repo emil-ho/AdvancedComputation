@@ -1,0 +1,24 @@
+Neighbors of the atoms after initialization             
+Time of initialization: 19/01/2022 00:03:59 CET
+
+Atom number: 0
+  Position of Atom: [-0.8397981 -0.8397981 -0.8397981]
+  Number of neighbors: 3
+  Index           Position           Distance
+   1      0.0000   0.0000  -0.8398   1.19
+   2     -0.8398   0.0000   0.0000   1.19
+   3      0.0000  -0.8398   0.0000   1.19
+
+Atom number: 1
+  Position of Atom: [ 0.         0.        -0.8397981]
+  Number of neighbors: 2
+  Index           Position           Distance
+   2     -0.8398   0.0000   0.0000   1.19
+   3      0.0000  -0.8398   0.0000   1.19
+
+Atom number: 2
+  Position of Atom: [-0.8397981  0.         0.       ]
+  Number of neighbors: 1
+  Index           Position           Distance
+   3      0.0000  -0.8398   0.0000   1.19
+

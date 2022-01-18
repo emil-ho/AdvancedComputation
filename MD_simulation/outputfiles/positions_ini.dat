@@ -1,0 +1,7 @@
+# Initial positions of the atoms in units of SIGMA         
+# Time of initialization: 19/01/2022 00:03:59 CET        
+# first column: Atom number, rest: x,y,z coordinate
+   0   -0.8398   -0.8398   -0.8398
+   1    0.0000    0.0000   -0.8398
+   2   -0.8398    0.0000    0.0000
+   3    0.0000   -0.8398    0.0000

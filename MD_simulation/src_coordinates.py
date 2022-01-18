@@ -2,7 +2,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
-
 from itertools import product, combinations
 
 # Problems:
@@ -122,6 +121,9 @@ def initialize_positions(number_fcc_units, reduced_density, see_atoms=False, sav
                     fmt='%4g' + '% 10.4f' * 3)
 
     return positions, box, boxl
+
+def save_traj(positions):
+    return None
 
 #######################################
 ###### VELOCITIES
@@ -251,4 +253,3 @@ def plot_velocity_hist(velocities, number_hist_bins, see_histogram=False):
         plt.show()
 
     return vel_hist_x, bin_edges_x, vel_hist_y, bin_edges_y, vel_hist_z, bin_edges_z
-    

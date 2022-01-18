@@ -1,7 +1,7 @@
 '''This file contains older, slower versions of the calculating algorithms'''
 import numpy as np
 from tqdm import tqdm
-from fake_inputs import *
+from expl_fake_inputs import *
 
 # first version of calculating energies
 def calc_energies1(positions, velocities, sigma=SIGMA, epsilon=EPSILON):

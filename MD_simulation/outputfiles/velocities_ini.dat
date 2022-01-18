@@ -1,0 +1,7 @@
+# Initial velocities of the atoms in units of ???         
+# Time of initialization: 19/01/2022 00:03:59 CET        
+# first column: Atom number, rest: x,y,z component
+   0    0.2414   -3.1350   -1.1555
+   1   -0.6485    2.1579    0.7216
+   2   -0.3726    0.9217    0.9981
+   3    0.7798    0.0554   -0.5643
