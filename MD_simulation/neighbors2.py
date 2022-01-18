@@ -55,7 +55,7 @@ def initialize_neighbor_list(positions, cutoff_distance, savedir=None):
                 counter += 1
 
     # this block is for the output file
-    if savedir != True:
+    if savedir != None:
         with open(savedir + '/nblist_ini.dat', 'w') as f:
             STAMP = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
             now = datetime.now()
@@ -74,8 +74,7 @@ def initialize_neighbor_list(positions, cutoff_distance, savedir=None):
                 f.write(f'  Position of Atom: {positions[i, 1:]}\n')
                 f.write(f'  Number of neighbors: {nn}\n')
                 f.write(f'  Index           Position           Distance\n')
-                for j in range(nbpoint[i] - 0, nbpoint[i] + nn):
-                    f.write(f'{format(positions[nblist[j]][0], "4g")}     ')
+                for j in range(nbpoint[i], nbpoint[i] + nn):
                     f.write(f'{format(positions[nblist[j]][0], "4g")}     ')
                     f.write(f'{format(positions[nblist[j]][1], " .4f")}  ')
                     f.write(f'{format(positions[nblist[j]][2], " .4f")}  ')
@@ -87,3 +86,14 @@ def initialize_neighbor_list(positions, cutoff_distance, savedir=None):
         # without double counting anyways
 
     return nblist, nbpoint
+
+
+def get_nb_pos(pos, nblist, nbpoint, index):
+    nn = nbpoint[index+1] - nbpoint[index]
+    nbs = np.zeros((nn,4))
+    counter = 0
+    for j in range(nbpoint[index], nbpoint[index] + nn):
+        nbs[counter] = pos[nblist[j]]
+        counter += 1
+    return nbs
+
