@@ -11,6 +11,7 @@ from src_coordinates import *
 from src_neighbors import *
 from src_verlet import *
 from src_verlet_slow import *
+from src_energies import *
 # from expl_fake_inputs import *
 
 
@@ -30,5 +31,6 @@ res = do_md_nb_pbc(positions_ini, velocities_ini, RED_TS, int(N_STEPS), nblist, 
 x_traj, v_traj, pot, kin, forc, ptosb = res
 
 save_traj(x_traj, SVDIR)
+save_energies(pot, kin, SVDIR)
 
 print('Simulation done')

@@ -29,6 +29,7 @@ res = do_md_nb_pbc(positions_ini, velocities_ini, TIMESTEP, N_STEPS, nblist, nbp
 x_traj, v_traj, pot, kin, forc, ptosb = res
 
 save_traj(x_traj, SAVEDIR)
+save_energies(pot, kin, SAVEDIR)
 
 '''
 # plot trajectory
