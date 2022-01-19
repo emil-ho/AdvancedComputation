@@ -35,7 +35,7 @@ def initialize_positions(number_fcc_units, reduced_density, see_atoms=False, sav
         Other rows are xyz coord of one basis vector of the box
     '''
     # calculate number of atoms
-    NATOMS = 4 * number_fcc_units**3
+    NATOMS = int(4 * number_fcc_units**3)
 
     # calculate the lattice constant (for an fcc lattice)
     A = (4 / reduced_density) ** (1/3)
@@ -122,7 +122,41 @@ def initialize_positions(number_fcc_units, reduced_density, see_atoms=False, sav
 
     return positions, box, boxl
 
-def save_traj(positions):
+def save_traj(positions, savedir):
+    """
+    This function saves the computed trajectory
+    
+    positions: array of dims (N_timesteps, N_atoms, 4)
+        In last dimension the first value is the index, the others the xyz coordinates
+    savedir: string
+        The location where it should be saved
+    """
+    N_time = len(positions)
+    N_atoms = len(positions[0])
+
+    with open(savedir + '/trajectory.dat', 'w') as f:
+            STAMP = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+            now = datetime.now()
+            local_now = now.astimezone()
+            local_tz = local_now.tzinfo
+            local_tzname = local_tz.tzname(local_now)
+            space = ' '
+            HEADER = f'Positions of the atoms at all timesteps \
+            \nTime of initialization: {STAMP + space + local_tzname}\n\n'
+            f.write(HEADER)
+
+    for i in range(N_time):
+        with open(savedir + '/trajectory.dat', 'a') as f:
+            f.write(f'Timestep: {i}\n')
+            f.write(f'Index           Position\n')
+            for j in range(N_atoms):
+                f.write(f'{format(positions[i,j,0], "4g")}     ')  # dirty fix
+#                arr = np.array([j])
+#                f.write(f'{format(arr, "4g")}     ')
+                f.write(f'{format(positions[i,j,1], " .4f")}  ')
+                f.write(f'{format(positions[i,j,2], " .4f")}  ')
+                f.write(f'{format(positions[i,j,3], " .4f")}  \n')
+            f.write('\n')
     return None
 
 #######################################
@@ -181,7 +215,7 @@ def initialize_velocities(positions, reduced_temperature, savedir=None):
         local_tzname = local_tz.tzname(local_now)
         space = ' '
 
-        HEADER = f'Initial velocities of the atoms in units of ??? \
+        HEADER = f'Initial velocities of the atoms in reduced units \
         \nTime of initialization: {STAMP + space + local_tzname}\
         \nfirst column: Atom number, rest: x,y,z component'
         np.savetxt(savedir + '/velocities_ini.dat', velocities, header=HEADER,

@@ -1,87 +1,138 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Nov 29 10:58:53 2021
-
-@author: Pedro
-"""
+'This file contains the gui and input stuff'
 import re
 import tkinter 
 from tkinter import simpledialog
 from tkinter import filedialog
 from tkinter import simpledialog
 from tkinter import ttk
+import sys, os
 
+global sigma1
+sigma1="nm"
+global epsilon1 
+epsilon1="K"
+global directory
+directory = os.getcwd() + '/outputfiles'
+
+
+def delete_values():
+    """This function is only for debuging an error """
+    file=open('src_read_values.txt',"r+")
+    file.seek(0)
+    file.truncate()
+    
 def return_values():
-    file=open('read_values.txt',"r+")
+    """This function returns the values given in the GUI
+    
+    returns:
+        fcc=Number of FCC cells
+        rd=Reduced density
+        rt=Reduced temperature
+        sig=Sigma of the LJ
+        eps=Epsilon of the LJ
+        cop=CutOff distance to truncate the potential (units of sigma)
+        col=CotOff distance to truncate the neighbourlist  (units of sigma)
+        ns=Number of steps of th esimultation
+        rs=Reduced time step
+        wh=Width of the bins in the histogram
+        sigma1= Units of sigma
+        epsilon1=Units of epsilon
+        svdir=location of the directory where output files are saved into
+        """
+        
+        
+    file=open('src_read_values.txt',"r+")
     for linea in file:
         if "fcc" in linea:
             numbers = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
-            print("FCC =",numbers)
+            
+            fcc=float(numbers[0])
         if "rd" in linea:
             numbers = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
-            print("rd =",numbers)
+            rd=float(numbers[0])
         if "rt" in linea:
             numbers = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
-            print("rt =",numbers)
+            rt=float(numbers[0])
         if "sig" in linea:
             numbers = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
-            print("sigma =",numbers)
+            sig=float(numbers[0])
         if "eps" in linea:
             numbers = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
-            print("epsilon =",numbers)
+            eps=float(numbers[0])
         if "cop" in linea:
             numbers = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
-            print("cop =",numbers)
+            cop=float(numbers[0])
         if "col" in linea:
             numbers = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
-            print("col =",numbers)
+            col=float(numbers[0])
         if "ns" in linea:
             numbers = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
-            print("ns =",numbers)
+            ns=float(numbers[0])
         if "rs" in linea:
             numbers = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
-            print("rs =",numbers)
+            rs=float(numbers[0])
         if "wh" in linea:
             numbers = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
-            print("wh =",numbers)
+            wh=float(numbers[0])
+        
+            
+    return(fcc,rd,rt,sig,eps,cop,col,ns,rs,wh,sigma1,epsilon1,directory)
 
 def write_values(fcc1,rd,rt,sig,eps,cop,col,ns,rs,wh):
       
-    f=open('read_values.txt',"r+")
+    f=open('src_read_values.txt',"r+")
     f.seek(0)
     f.write("fcc=")
     f.write(str(fcc1))
     f.write("\n")
+
     f.write("rd=")
     f.write(str(rd))
     f.write("\n")
+
     f.write("rt=")
     f.write(str(rt))
     f.write("\n")
+
     f.write("sig=")
     f.write(str(sig))
     f.write("\n")
+
+
+
     f.write("eps=")
     f.write(str(eps))
+    f.write("\n")
+
+
     f.write("\n")
     f.write("cop=")
     f.write(str(cop))
     f.write("\n")
+
     f.write("col=")
     f.write(str(col))
     f.write("\n")
+
     f.write("ns=")
     f.write(str(ns))
     f.write("\n")
+
     f.write("rs=")
     f.write(str(rs))
     f.write("\n")
+
     f.write("wh=")
     f.write(str(wh))
     f.truncate()
 
+
+    
+
+    
 def error_3():
     root3.destroy()
+
     
 def error3():
     global root3
@@ -100,10 +151,12 @@ def button_1():
     ######################################################################
  
     #Sigma Buttons
- 
+
     def button_5():
         global sigma1
-        sigma1= 'nanometers'
+        sigma1= 'nm'
+
+
         nseconds= tkinter.Label(root1,text='nanometers (nm)')
         nseconds.grid(row=3,column=2)
 
@@ -111,8 +164,9 @@ def button_1():
     
     def button_6():
         global sigma1
-        sigma1='Armstrongs'
-        armstrongs= tkinter.Label(root1,text=' Armstrongs (A) ')
+        sigma1='A'
+
+        armstrongs= tkinter.Label(root1,text='  Angstrongs (A) ')
         armstrongs.grid(row=3,column=2)
 
         
@@ -121,15 +175,14 @@ def button_1():
     def button_7():
         
         global epsilon1
-        epsilon1='Kelvin (K)'
+        epsilon1='K'
         kelvin= tkinter.Label(root1,text='Kelvin (K)')
         kelvin.grid(row=4,column=2)
 
         
     def button_8():
-        
         global epsilon1
-        epsilon1='Celsius'
+        epsilon1='C'
         celsius= tkinter.Label(root1,text='Celsius (C)')
         celsius.grid(row=4,column=2)
         
@@ -242,100 +295,136 @@ def button_1():
 
         wh=widthb.get()
         
+
+        
+        try:
+            if fcc1 != "":
+                float(fcc1)
+            if rd != "":
+                float(rd)
+            if rt != "": 
+               float(rt)
+            if sig != "":
+                float(sig)
+            if eps != "":
+                float(eps)
+
+            if cop != "":
+                float(cop)
+            if col != "":
+                float(col)
+            if ns != "":
+                float(ns)
+            if rs != "":
+                float(rs)
+            if wh != "":
+                float(wh)
+        except:
+            error3()
+
         
         
         
-        if (fcc.get()) == "":
+        
+        if fcc1 == "":
             error()
-        elif (reducedD.get()) == "":
+        elif rd == "":
             error()
-        elif (reducedT.get()) == "": 
+        elif rt == "": 
             error()     
-        elif sigma.get() == "":
+        elif sig == "":
             error()
-        elif epsilon.get() == "":
+        elif eps == "":
             error()
-        elif cutoffP.get() == "":
+        elif cop == "":
             error()
-        elif (cutoffL.get()) == "":
+        elif col == "":
             error()
-        elif (numbersteps.get()) == "":
+        elif ns == "":
             error()
-        elif (reducedt.get()) == "":
+        elif rs == "":
             error()
-        elif (widthb.get()) == "":
+        elif wh == "":
             error()
         else:
             root1.destroy()
             
-            
+
+        
         if (fcc1) == "":
-            f = open("default_values.txt", "r+")
+            f = open("src_default_values.txt", "r+")
             for linea in f:
                 if "FCC" in linea:
                     fcc1=linea[4:]
             f.close()
         if (rd) == "":
-            f = open("default_values.txt", "r+")
+            f = open("src_default_values.txt", "r+")
             for linea in f:
                 if "RD" in linea:
                     rd=linea[3:]
             f.close()
         if (rt) == "":
-            f = open("default_values.txt", "r+")
+            f = open("src_default_values.txt", "r+")
             for linea in f:
                 if "RT" in linea:
                     rt=linea[3:]
             f.close()
      
         if sig == "":
-            f = open("default_values.txt", "r+")
+            global sigma1
+            sigma1= "nm"
+            f = open("src_default_values.txt", "r+")
             for linea in f:
                 if "SIG" in linea:
                     sig=linea[4:]
+                    sigma1="nm"
             f.close()
 
         if eps == "":
-            f = open("default_values.txt", "r+")
+            global epsilon1
+            epsilon1= "K"
+            f = open("src_default_values.txt", "r+")
             for linea in f:
                 if "EPS" in linea:
                     eps=linea[4:]
+                    epsilon1="K"
             f.close()
 
         if cop == "":
-            f = open("default_values.txt", "r+")
+            f = open("src_default_values.txt", "r+")
             for linea in f:
                 if "COFDLJ" in linea:
                     cop=linea[7:]
             f.close()
 
         if col == "":
-            f = open("default_values.txt", "r+")
+            f = open("src_default_values.txt", "r+")
             for linea in f:
                 if "COFDNL" in linea:
                     col=linea[7:]
             f.close()
 
         if ns == "":
-            f = open("default_values.txt", "r+")
+            f = open("src_default_values.txt", "r+")
             for linea in f:
                 if "NS" in linea:
                     ns=linea[3:]
             f.close()
 
         if rs == "":
-            f = open("default_values.txt", "r+")
+            f = open("src_default_values.txt", "r+")
             for linea in f:
                 if "RS" in linea:
                     rs=linea[3:]
             f.close()
 
         if wh == "":
-            f = open("default_values.txt", "r+")
+            f = open("src_default_values.txt", "r+")
             for linea in f:
                 if "WH" in linea:
                     wh=linea[3:]
             f.close()
+            
         write_values(fcc1, rd, rt, sig, eps, cop, col, ns, rs, wh)
 
         
@@ -350,7 +439,7 @@ def button_1():
 
         
         print('Using default values...')
-        f = open("default_values.txt", "r+")
+        f = open("src_default_values.txt", "r+")
         for linea in f:
             if "FCC" in linea:
 
@@ -400,16 +489,18 @@ def button_1():
             if "WH" in linea:
 
                 wh=linea[3:]
-            
-        write_values(fcc1,rd,rt,sig,eps,cop,col,ns,rs,wh)
         root1.destroy()
+        write_values(fcc1,rd,rt,sig,eps,cop,col,ns,rs,wh)
+        
         
     def button_10():
-        print("a")
+        root1.destroy()
+        sys.exit()
         
     ################################################################
         
     root.destroy()
+    global root1
     root1=tkinter.Tk()
     root1.title("CHOOSE YOUR PARAMETERS ")
                             #Variables
@@ -452,7 +543,7 @@ def button_1():
     
     button_5=ttk.Button(root1,text="nanometers (nm)",command=button_5)
     button_5.grid(row=3,column=3)
-    button_6=ttk.Button(root1,text="Armostrongs (A)",command=button_6)
+    button_6=ttk.Button(root1,text=" Angstrongs  (A)",command=button_6)
     button_6.grid(row=3,column=4)
 
     
@@ -524,64 +615,146 @@ def button_1():
     #BotOn enter
     
     button2=ttk.Button(root1,text="Enter",command=button_4)
-    button2.grid(row=11,column=2)
+    button2.grid(row=12,column=2)
 
 
     
     #Use default values
     
     button_default=ttk.Button(root1,text="Use default values",command=button_9)
-    button_default.grid(row=11,column=4)
+    button_default.grid(row=12,column=4)
     
     #Quit
     
     button_quit=ttk.Button(root1,text="Quit",command=button_10)
-    button_quit.grid(row=11,column=0)
+    button_quit.grid(row=12,column=0)
+    def button_folder():
+        root2=tkinter.Tk()
+        global directory
+        directory=tkinter.filedialog.askdirectory()
+        directory=directory
+        root2.destroy()
+        root2.mainloop()
+        
+    button_folder=ttk.Button(root1,text="Choose a folder to store the data",command=button_folder)
+    button_folder.grid(row=11,column=2)
     
     root1.mainloop()
 
 def button_2():
 
-    root.destroy()
-    archivo=tkinter.filedialog.askopenfile(mode='r')
-    for linea in archivo:
-        if "NumberFCCUnits" in linea:
-            fcc1 = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+        
+    def mybutton1():
+        root2=tkinter.Tk()
+        global archivo
+        
+        archivo=tkinter.filedialog.askopenfile(mode='r')
 
-        if "ReducedDensity" in linea:
-            rd = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
 
-        if "ReducedTemperature" in linea:
-            rt = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+        root2.destroy()
+        root2.mainloop()
+        
+    def mybutton2():
+        root2=tkinter.Tk()
+        global directory
+        directory=tkinter.filedialog.askdirectory()
+        root2.destroy()
+        root2.mainloop()
+        
+    def mybutton3():
+        
+        global sigma1
+        global epsilon1
 
-        if "Sigma" in linea:
-            sig = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
 
-        if "Epsilon" in linea:
-            eps = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+        for linea in archivo:
+            if "NumberFCCUnits" in linea:
+                fcc1 = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
 
-        if "CutoffPotential" in linea:
-            cop = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+            if "ReducedDensity" in linea:
+                rd = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+                
+            if "ReducedTemperature" in linea:
+                rt = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+
+            if "Sigma" in linea:
+                if "nm" in linea:
+
+                    sigma1="nm"
+                if "A" in linea:
+
+                    sigma1="A"
+                sig = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
             
-        if "CutoffList" in linea:
-            col = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+            if "Epsilon" in linea:
+                if "K" in linea:
 
-        if "NumberOfSteps" in linea:
-            ns = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+                    epsilon1="K"
+                if "C" in linea:
 
-        if "ReducedTimeStep" in linea:
-            rs = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+                    epsilon1="C"
+                eps = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
 
-        if "WidthBinPairDistributionFunction" in linea:
-            wh = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+            if "CutoffPotential" in linea:
+                cop = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
             
-    write_values(fcc1,rd,rt,sig,eps,cop,col,ns,rs,wh)
-   
+            if "CutoffList" in linea:
+                col = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+
+            if "NumberOfSteps" in linea:
+                ns = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+
+            if "ReducedTimeStep" in linea:
+                rs = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+                    
+            if "WidthBinPairDistributionFunction" in linea:
+                wh = [float(s) for s in re.findall(r'-?\d+\.?\d*', linea)]
+        write_values(fcc1,rd,rt,sig,eps,cop,col,ns,rs,wh)
+        archivo.close()
+
+        rooty.destroy()
+    
+    def qit():
+        rooty.destroy()
+        sys.exit()
+        
+
+    root.destroy()   
+    global rooty
+    rooty=tkinter.Tk()
+    rooty.title('SELECT AN OPTION')
+    mybutton1 = tkinter.Button(rooty, text="Choose your text file", padx=60,pady=30,command=mybutton1)
+    mybutton1.grid(row=0,column=1)
+    mybutton2 = tkinter.Button(rooty, text="Choose a folder to store the data", padx=30,pady=30,command=mybutton2)
+    mybutton2.grid(row=1,column=1)
+    
+    #Enter
+    
+    mybutton3=ttk.Button(rooty,text="Enter",command=mybutton3)
+    mybutton3.grid(row=2,column=1)
+
+
+    
+    #Quit
+    
+    button_quit=ttk.Button(rooty,text="Quit",command=qit)
+    button_quit.grid(row=3,column=1)
+
+    
+     
+    
 def button_3():
     root.destroy()
+    sys.exit()
   
 def mainbutton():
+    
+
     global root
+    global sigma1
+    sigma1="nm"
+    global epsilon1
+    epsilon1="K"
     root=tkinter.Tk()
     root.title('SELECT AN OPTION')
     mybutton1 = tkinter.Button(root, text="Enter input parameters directly", padx=29,pady=30,command=button_1)
@@ -592,6 +765,7 @@ def mainbutton():
     mybutton4.pack()
     mybutton3 = tkinter.Button(root, text="Quit", padx=70,pady=20,command=button_3)
     mybutton3.pack()
+
 
 
     root.mainloop()
@@ -704,6 +878,30 @@ def defaultvalues():
 
     #BotOn enter
     def enter():
+        fcc1=fcc.get()
+
+        rd=reducedD.get()
+
+        rt=reducedT.get()
+
+        sig=sigma.get()
+
+        eps=epsilon.get()
+
+        cop=cutoffP.get()
+
+        col=cutoffL.get()
+
+        ns=numbersteps.get()
+
+        rs=reducedt.get()
+
+        wh=widthb.get()
+        
+
+        
+        
+
 
         f = open("default_values.txt", "r+")
         for linea in f:
@@ -727,13 +925,16 @@ def defaultvalues():
                     
             if "SIG" in linea:
                 if sigma.get() == "":
+
                     sig=linea[4:]
                 else:
                     sig=sigma.get()
 
             if "EPS" in linea:
                 if epsilon.get() == "":
+                    
                     eps=linea[4:]
+                    
                 else:
                     eps=epsilon.get()
         
@@ -767,16 +968,27 @@ def defaultvalues():
                 else:
                     wh=widthb.get()
         try:
-            float(fcc1)
-            float(rd)
-            float(rt)
-            float(sig)
-            float(eps)
-            float(cop)
-            float(col)
-            float(ns)
-            float(rs)
-            float(wh)
+
+            if fcc1 != "":
+                float(fcc1)
+            if rd != "":
+                float(rd)
+            if rt != "": 
+               float(rt)
+            if sig != "":
+                float(sig)
+            if eps != "":
+                float(eps)
+            if cop != "":
+                float(cop)
+            if col != "":
+                float(col)
+            if ns != "":
+                float(ns)
+            if rs != "":
+                float(rs)
+            if wh != "":
+                float(wh)
             f.seek(0)
             f.write("FCC=")
             f.write(fcc1)
@@ -814,7 +1026,7 @@ def defaultvalues():
             root1.destroy()
         except:
             error3()
-        
+        sys.exit()
         
     
     button2=ttk.Button(root1,text="Enter",command=enter)
@@ -827,6 +1039,7 @@ def defaultvalues():
     #Quit
     def close():
         root1.destroy()
+        sys.exit()
     
     button_quit=ttk.Button(root1,text="Quit",command=close)
     button_quit.grid(row=11,column=0)

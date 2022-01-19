@@ -13,8 +13,8 @@ from src_verlet_slow import *
 from expl_fake_inputs import *
 
 
-SAVEDIR = os.getcwd() + '/MD_simulation/outputfiles'
-NUMBER_FCC_UNITS = 1
+SAVEDIR = os.getcwd() + '/outputfiles'
+NUMBER_FCC_UNITS = 2
 
 positions_ini, BOX, BOXL = initialize_positions(NUMBER_FCC_UNITS, REDUCED_DENSITY, see_atoms=False, savedir=SAVEDIR)
 velocities_ini = initialize_velocities(positions_ini, reduced_temperature=REDUCED_TEMPERATURE, savedir=SAVEDIR)
@@ -22,11 +22,13 @@ nblist, nbpoint = initialize_neighbor_list(positions_ini, CUTOFF_DISTANCE, saved
 # plot_velocity_hist(velocities_ini, False)
 
 TIMESTEP = 0.001
-N_STEPS = 1000
+N_STEPS = 10
 
 res = do_md_nb_pbc(positions_ini, velocities_ini, TIMESTEP, N_STEPS, nblist, nbpoint, BOX, BOXL, SIGMA, EPSILON)
 
 x_traj, v_traj, pot, kin, forc, ptosb = res
+
+save_traj(x_traj, SAVEDIR)
 
 '''
 # plot trajectory

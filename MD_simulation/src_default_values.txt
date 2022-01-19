@@ -8,3 +8,4 @@ COFDNL=85
 NS=36
 RS=8
 WH=57
+SVDIR = os.cwd() + '/outputfiles'

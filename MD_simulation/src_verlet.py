@@ -1,4 +1,5 @@
 '''This file contains the verlet algorithm and what is needed for it'''
+from turtle import position
 import numpy as np
 from tqdm import tqdm
 
@@ -267,5 +268,7 @@ def do_md_nb_pbc(x_init, v_init, dt, n_steps, nblist, nbpoint, box, boxl, sigma,
         
         # calculate energies
         pot[i], kin[i] = calc_energies(x[i], v[i], sigma, epsilon)
-        
+    
+    x[:,:,0] = x_init[:,0]
+
     return x, v, pot, kin, forces, ptosb
